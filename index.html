@@ -293,6 +293,109 @@
             line-height: 1.9;
         }
 
+        /* Styling untuk halaman Renungan Daniel */
+        .renungan-daniel {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-top: 3rem;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+
+        .renungan-daniel h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .renungan-daniel h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: var(--primary);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 0.5rem;
+        }
+
+        .renungan-daniel h4 {
+            font-size: 1.1rem;
+            color: var(--accent);
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .renungan-daniel ul, .renungan-daniel ol {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .renungan-daniel li {
+            margin-bottom: 0.5rem;
+        }
+
+        .renungan-image {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            border-radius: 15px;
+            margin: 2rem auto;
+            display: block;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .renungan-quote {
+            background: linear-gradient(135deg, var(--secondary) 0%, #f5ebe0 100%);
+            border-left: 5px solid var(--accent);
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 0 15px 15px 0;
+            font-style: italic;
+            font-size: 1.1rem;
+            position: relative;
+        }
+
+        .renungan-quote::before {
+            content: '"';
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            color: var(--accent);
+            opacity: 0.3;
+            position: absolute;
+            top: -10px;
+            left: 10px;
+        }
+
+        .renungan-refleksi {
+            background: var(--light);
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            border: 2px solid var(--secondary);
+        }
+
+        .renungan-refleksi h4 {
+            color: var(--primary);
+            margin-top: 0;
+        }
+
+        .penutup-doa {
+            background: linear-gradient(135deg, var(--primary) 0%, #34495e 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .penutup-doa h4 {
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
         footer {
             background: var(--primary);
             color: white;
@@ -783,4 +886,5 @@
     </script>
 </body>
 </html>
+
 
