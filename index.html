@@ -326,10 +326,10 @@
     <!-- JAVASCRIPT -->
     <script>
 // ============================================================
-// KONFIGURASI - API KEY GROQ BARU
+// KONFIGURASI - API KEY GROQ (Pastikan key ini valid)
 // ============================================================
 const GROQ_API_KEY = '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';
-const GROQ_MODEL = 'llama3-70b-8192'; // Model lebih stabil untuk text generation
+const GROQ_MODEL = 'llama3-70b-8192';
 
 // State
 let currentDate = new Date();
@@ -687,7 +687,7 @@ DOA: [doa penutup 2-3 kalimat]`;
     return parseDevotionText(text);
 }
 
-// Parse format text menjadi objek
+// Parse format text menjadi objek - PERBAIKAN UTAMA
 function parseDevotionText(text) {
     const lines = text.split('\n');
     let result = {
@@ -697,7 +697,7 @@ function parseDevotionText(text) {
         reference: '',
         content: '',
         prayer: '',
-        source: 'Groq API (Live)'
+        source: 'Groq AI (Live)'
     };
     
     let currentSection = '';
@@ -707,23 +707,29 @@ function parseDevotionText(text) {
         line = line.trim();
         if(!line) continue;
         
-        if(line.startsWith('TITLE:')) {
-            result.title = line.replace('TITLE:', '').trim();
-        } else if(line.startsWith('VERSE:')) {
-            result.verse = line.replace('VERSE:', '').trim();
-        } else if(line.startsWith('REF:')) {
-            result.reference = line.replace('REF:', '').trim();
-        } else if(line.startsWith('CONTENT:')) {
+        // Perbaikan parsing - cari format Indonesia (JUDUL, AYAT, REFERENSI)
+        if(line.toUpperCase().startsWith('JUDUL:')) {
+            result.title = line.substring(6).trim();
+        } else if(line.toUpperCase().startsWith('AYAT:')) {
+            result.verse = line.substring(5).trim();
+        } else if(line.toUpperCase().startsWith('REFERENSI:')) {
+            result.reference = line.substring(10).trim();
+        } else if(line.toUpperCase().startsWith('ISI:')) {
             currentSection = 'content';
-        } else if(line.startsWith('PRAYER:')) {
+        } else if(line.toUpperCase().startsWith('DOA:')) {
             if(contentLines.length > 0) {
                 result.content = contentLines.join('\n\n');
             }
-            result.prayer = line.replace('PRAYER:', '').trim();
+            result.prayer = line.substring(4).trim();
             currentSection = '';
         } else if(currentSection === 'content') {
             contentLines.push(line);
         }
+    }
+    
+    // Jika masih ada content yang belum masuk
+    if(contentLines.length > 0 && !result.content) {
+        result.content = contentLines.join('\n\n');
     }
     
     // Format content ke HTML
@@ -889,3 +895,4 @@ window.addEventListener('load', () => {
     </script>
 </body>
 </html>
+
