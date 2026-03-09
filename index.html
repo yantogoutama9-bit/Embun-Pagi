@@ -85,7 +85,6 @@
                     <button onclick="showPage('artikel')" class="nav-link text-stone-600 hover:text-amber-600 font-medium transition-colors" data-page="artikel">Artikel</button>
                     <button onclick="showPage('santapan')" class="nav-link text-stone-600 hover:text-amber-600 font-medium transition-colors" data-page="santapan">Renungan Harian</button>
                     <button onclick="showPage('tentang')" class="nav-link text-stone-600 hover:text-amber-600 font-medium transition-colors" data-page="tentang">Tentang Web</button>
-                    <button onclick="showPage('dukung')" class="nav-link text-stone-600 hover:text-amber-600 font-medium transition-colors" data-page="dukung">Dukung Doa</button>
                 </div>
                 <div class="md:hidden">
                     <button onclick="toggleMobileMenu()" class="text-stone-600 hover:text-amber-600 focus:outline-none">
@@ -99,7 +98,6 @@
                 <button onclick="showPage('artikel')" class="block w-full text-left px-3 py-3 text-stone-600 hover:text-amber-600 hover:bg-amber-50 rounded-lg font-medium">Artikel</button>
                 <button onclick="showPage('santapan')" class="block w-full text-left px-3 py-3 text-stone-600 hover:text-amber-600 hover:bg-amber-50 rounded-lg font-medium">Renungan Harian</button>
                 <button onclick="showPage('tentang')" class="block w-full text-left px-3 py-3 text-stone-600 hover:text-amber-600 hover:bg-amber-50 rounded-lg font-medium">Tentang Web</button>
-                <button onclick="showPage('dukung')" class="block w-full text-left px-3 py-3 text-stone-600 hover:text-amber-600 hover:bg-amber-50 rounded-lg font-medium">Dukung Doa</button>
             </div>
         </div>
     </nav>
@@ -276,7 +274,7 @@
                 </div>
                 <div class="bg-stone-50 rounded-3xl p-12 text-center">
                     <h2 class="serif text-3xl font-bold text-stone-800 mb-8">Fitur Unggulan</h2>
-                    <div class="grid md:grid-cols-3 gap-8">
+                    <div class="grid md:grid-cols-2 gap-8">
                         <div class="p-6">
                             <div class="w-16 h-16 bg-white rounded-full shadow-md flex items-center justify-center mx-auto mb-4 text-amber-600 text-2xl">
                                 <i class="fas fa-book-open"></i>
@@ -289,14 +287,7 @@
                                 <i class="fas fa-magic"></i>
                             </div>
                             <h3 class="font-bold text-stone-800 mb-2">Renungan Harian</h3>
-                            <p class="text-stone-600 text-sm">Renungan Harian Embun Pagi.</p>
-                        </div>
-                        <div class="p-6">
-                            <div class="w-16 h-16 bg-white rounded-full shadow-md flex items-center justify-center mx-auto mb-4 text-amber-600 text-2xl">
-                                <i class="fas fa-praying-hands"></i>
-                            </div>
-                            <h3 class="font-bold text-stone-800 mb-2">Dukungan Doa</h3>
-                            <p class="text-stone-600 text-sm">Kirim permohonan doa dan dapatkan dukungan rohani.</p>
+                            <p class="text-stone-600 text-sm">Renungan Harian Embun Pagi yang diperbarui setiap hari.</p>
                         </div>
                     </div>
                 </div>
@@ -304,74 +295,11 @@
         </section>
     </div>
 
-    <!-- Halaman Dukung Doa - EMAIL ANDA -->
-    <div id="page-dukung" class="page-content hidden pt-20">
-        <section class="min-h-screen bg-gradient-to-br from-amber-50 to-orange-50 py-20">
-            <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-12">
-                    <h1 class="serif text-4xl font-bold text-stone-900 mb-4">Dukung Doa</h1>
-                    <p class="text-stone-600 text-lg">Kirimkan permohonan doa Anda. Kami akan berdoa untuk Anda.</p>
-                </div>
-                <div class="bg-white rounded-3xl shadow-xl p-8 md:p-12">
-                    <!-- 
-                    ============================================================
-                    BARIS 1: GANTI EMAIL DI SINI
-                    Ganti 'email-anda@gmail.com' dengan email Anda yang sebenarnya
-                    ============================================================
-                    -->
-                    <form action="https://formsubmit.co/yantogoutama9gmail.com" method="POST" onsubmit="handlePrayerSubmit(event)">
-                        <!-- Konfigurasi FormSubmit -->
-                        <input type="hidden" name="_subject" value="Permohonan Doa Baru - Renungan Rohani">
-                        <input type="hidden" name="_template" value="table">
-                        <input type="hidden" name="_captcha" value="false">
-                        <!-- Redirect setelah submit -->
-                        <input type="hidden" name="_next" value="https://forisaabadijayasejahtera.github.io/ISLA-Insight/thanks.html">
-                        
-                        <div class="grid md:grid-cols-2 gap-6 mb-6">
-                            <div>
-                                <label class="block text-sm font-semibold text-stone-700 mb-2">Nama Lengkap</label>
-                                <input type="text" name="nama" required class="w-full px-4 py-3 rounded-xl border border-stone-200 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 outline-none" placeholder="Masukkan nama Anda">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-semibold text-stone-700 mb-2">Email (opsional)</label>
-                                <input type="email" name="email" class="w-full px-4 py-3 rounded-xl border border-stone-200 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 outline-none" placeholder="email@contoh.com">
-                            </div>
-                        </div>
-                        <div class="mb-6">
-                            <label class="block text-sm font-semibold text-stone-700 mb-2">Kategori Permohonan</label>
-                            <select name="kategori" required class="w-full px-4 py-3 rounded-xl border border-stone-200 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 outline-none bg-white">
-                                <option value="">Pilih kategori</option>
-                                <option value="Kesembuhan">Kesembuhan</option>
-                                <option value="Pekerjaan">Pekerjaan & Karir</option>
-                                <option value="Keluarga">Keluarga & Pernikahan</option>
-                                <option value="Keuangan">Keuangan</option>
-                                <option value="Pendidikan">Pendidikan</option>
-                                <option value="Umum">Umum</option>
-                            </select>
-                        </div>
-                        <div class="mb-6">
-                            <label class="block text-sm font-semibold text-stone-700 mb-2">Permohonan Doa</label>
-                            <textarea name="doa" required rows="5" class="w-full px-4 py-3 rounded-xl border border-stone-200 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 outline-none resize-none" placeholder="Tuliskan permohonan doa Anda di sini..."></textarea>
-                        </div>
-                        <div class="flex items-start gap-3 mb-6">
-                            <input type="checkbox" id="privat" name="privat" value="ya" class="mt-1 w-4 h-4 text-amber-600 rounded focus:ring-amber-500 border-stone-300">
-                            <label for="privat" class="text-sm text-stone-600">Saya ingin permohonan ini tetap privat (tidak dipublikasikan)</label>
-                        </div>
-                        <button type="submit" class="w-full py-4 bg-gradient-to-r from-amber-500 to-orange-600 text-white font-bold rounded-xl shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2">
-                            <i class="fas fa-paper-plane"></i> Kirim Permohonan Doa
-                        </button>
-                    </form>
-                    <!-- AKHIR FORM -->
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <!-- Footer - EMAIL ANDA -->
+    <!-- Footer -->
     <footer class="bg-stone-900 text-stone-400 py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid md:grid-cols-4 gap-8 mb-8">
-                <div class="col-span-2">
+            <div class="grid md:grid-cols-2 gap-8 mb-8">
+                <div>
                     <div class="flex items-center gap-3 mb-4">
                         <div class="w-8 h-8 bg-gradient-to-br from-amber-500 to-orange-600 rounded-full flex items-center justify-center text-white text-sm">
                             <i class="fas fa-cross"></i>
@@ -386,19 +314,6 @@
                         <li><button onclick="showPage('artikel')" class="hover:text-amber-500 transition-colors">Artikel</button></li>
                         <li><button onclick="showPage('santapan')" class="hover:text-amber-500 transition-colors">Renungan Harian</button></li>
                         <li><button onclick="showPage('tentang')" class="hover:text-amber-500 transition-colors">Tentang</button></li>
-                        <li><button onclick="showPage('dukung')" class="hover:text-amber-500 transition-colors">Dukung Doa</button></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="text-white font-semibold mb-4">Kontak</h4>
-                    <ul class="space-y-2 text-sm">
-                        <!-- 
-                        ============================================================
-                        BARIS 2: GANTI EMAIL DI SINI JUGA
-                        ============================================================
-                        -->
-                        <li class="flex items-center gap-2"><i class="fas fa-envelope text-amber-500"></i> ===</li>
-                        <li class="flex items-center gap-2"><i class="fas fa-map-marker-alt text-amber-500"></i> Indonesia</li>
                     </ul>
                 </div>
             </div>
@@ -411,8 +326,7 @@
     <!-- JAVASCRIPT -->
     <script>
         // ============================================================
-        // BARIS 3: GANTI API KEY GROQ ANDA DI SINI
-        // Contoh: const GROQ_API_KEY = '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';
+        // GANTI API KEY GROQ ANDA DI SINI
         // ============================================================
         const GROQ_API_KEY = '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';
         
@@ -607,7 +521,7 @@
             // Cek API Key
             if(!GROQ_API_KEY || GROQ_API_KEY === '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') {
                 log('API Key belum di-set!', 'error');
-                showError('API Key Groq belum dimasukkan. Silakan edit file index.html baris dengan tulisan "BARIS 3: GANTI API KEY".');
+                showError('API Key Groq belum dimasukkan. Silakan edit file index.html bagian "GANTI API KEY GROQ ANDA DI SINI".');
                 useOfflineMode();
                 return;
             }
@@ -831,16 +745,6 @@ Gaya: hangat, personal, seperti Santapan Harian. Panjang: 300-400 kata.`;
             return Math.floor((date - start) / (1000 * 60 * 60 * 24));
         }
 
-        function handlePrayerSubmit(e) {
-            // Form akan submit ke FormSubmit.co
-            // Tidak perlu preventDefault karena kita ingin form benar-benar submit
-            // Tapi kita bisa tambahkan konfirmasi
-            const confirmed = confirm('Permohonan doa Anda akan dikirim. Tuhan Yesus memberkati!');
-            if(!confirmed) {
-                e.preventDefault();
-            }
-        }
-
         // Initialization
         window.addEventListener('load', () => {
             log('Page loaded, initializing...');
@@ -851,7 +755,7 @@ Gaya: hangat, personal, seperti Santapan Harian. Panjang: 300-400 kata.`;
                 const article = articlesDatabase.find(a => a.slug === slug);
                 if(article) showArticleDetail(article.id);
                 else showPage('artikel');
-            } else if(['artikel', 'santapan', 'tentang', 'dukung'].includes(hash)) {
+            } else if(['artikel', 'santapan', 'tentang'].includes(hash)) {
                 showPage(hash);
             } else {
                 showPage('artikel');
@@ -872,5 +776,3 @@ Gaya: hangat, personal, seperti Santapan Harian. Panjang: 300-400 kata.`;
     </script>
 </body>
 </html>
-
-
