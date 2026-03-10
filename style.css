@@ -1,18 +1,18 @@
 body{
 font-family: Georgia, serif;
-background:#f4f4f4;
+background:#f3f3f3;
 margin:0;
 padding:0;
 }
 
 .container{
-max-width:800px;
+max-width:900px;
 margin:auto;
 background:white;
 padding:40px;
 margin-top:40px;
-box-shadow:0 10px 30px rgba(0,0,0,0.1);
 border-radius:10px;
+box-shadow:0 10px 25px rgba(0,0,0,0.1);
 }
 
 h1{
@@ -20,25 +20,12 @@ text-align:center;
 margin-bottom:30px;
 }
 
-.renungan{
-line-height:1.7;
-font-size:18px;
-}
-
-.quote{
-font-style:italic;
-border-left:4px solid #caa75c;
-padding:15px;
-margin-bottom:20px;
-background:#fafafa;
-}
-
 .btn{
 display:inline-block;
-margin-top:30px;
+margin-top:25px;
 padding:10px 20px;
-background:#caa75c;
+background:#b08d57;
 color:white;
 text-decoration:none;
-border-radius:5px;
+border-radius:6px;
 }
