@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Renungan Harian</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Renungan Hari Ini</h1>
+
+<div id="renungan"></div>
+
+<a href="quotes.html" class="btn">Quotes Rohani</a>
+
+</div>
+
+<script>
+
+let today = new Date();
+let y = today.getFullYear();
+let m = String(today.getMonth()+1).padStart(2,'0');
+let d = String(today.getDate()).padStart(2,'0');
+
+let url = `https://alkitab.mobi/2/renungan/roc/${y}/${m}/${d}/`;
+
+document.getElementById("renungan").innerHTML =
+`<iframe src="${url}" width="100%" height="700" frameborder="0"></iframe>`;
+
+</script>
+
+</body>
+</html>
