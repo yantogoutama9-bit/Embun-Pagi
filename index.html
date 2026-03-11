@@ -50,7 +50,6 @@
             height: 300px;
             top: -150px;
             right: -100px;
-            animation-delay: 0s;
         }
 
         .shape:nth-child(2) {
@@ -59,20 +58,6 @@
             bottom: -100px;
             left: -100px;
             animation-delay: 5s;
-        }
-
-        .shape:nth-child(3) {
-            width: 150px;
-            height: 150px;
-            top: 50%;
-            left: 50%;
-            animation-delay: 10s;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(30px, -30px) scale(1.1); }
-            66% { transform: translate(-20px, 20px) scale(0.9); }
         }
 
         header {
@@ -101,6 +86,43 @@
             font-weight: 300;
         }
 
+        .status-bar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            font-size: 0.75rem;
+            color: #666;
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 15px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #e74c3c;
+            animation: pulse 2s infinite;
+        }
+
+        .status-dot.active {
+            background: #2ecc71;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
         .date-nav {
             display: flex;
             justify-content: center;
@@ -126,10 +148,15 @@
             backdrop-filter: blur(10px);
         }
 
-        .nav-btn:hover {
+        .nav-btn:hover:not(:disabled) {
             background: rgba(212, 175, 55, 0.3);
             border-color: #d4af37;
             transform: scale(1.1);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
         }
 
         .date-display {
@@ -139,27 +166,22 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             font-family: 'Cormorant Garamond', serif;
             font-size: 1.3rem;
-            min-width: 250px;
+            min-width: 300px;
             text-align: center;
             backdrop-filter: blur(10px);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
         }
 
-        .auto-update-badge {
-            display: inline-block;
-            background: rgba(46, 204, 113, 0.2);
-            color: #2ecc71;
-            font-size: 0.7rem;
-            padding: 4px 10px;
-            border-radius: 12px;
+        .today-indicator {
+            background: linear-gradient(135deg, #d4af37 0%, #f4e5c2 100%);
+            color: #1a1a2e;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 600;
             margin-left: 10px;
-            border: 1px solid rgba(46, 204, 113, 0.3);
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.6; }
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .tabs {
@@ -341,26 +363,77 @@
             to { transform: rotate(360deg); }
         }
 
+        .error-message {
+            text-align: center;
+            padding: 40px;
+            color: #e74c3c;
+        }
+
+        .retry-btn {
+            background: rgba(231, 76, 60, 0.2);
+            border: 1px solid #e74c3c;
+            color: #e74c3c;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            margin-top: 15px;
+            font-family: 'Montserrat', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .retry-btn:hover {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .source-link {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .source-link a {
+            color: #d4af37;
+            text-decoration: none;
+            font-size: 0.85rem;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .source-link a:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+
+        .setup-notice {
+            background: rgba(231, 76, 60, 0.1);
+            border: 1px solid rgba(231, 76, 60, 0.3);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            color: #e74c3c;
+        }
+
+        .setup-notice h3 {
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .setup-notice p {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
         @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes fadeIn {
@@ -375,7 +448,8 @@
             .renungan-content { font-size: 1rem; }
             .tabs { flex-direction: column; align-items: center; }
             .tab-btn { width: 200px; }
-            .date-display { min-width: 200px; font-size: 1.1rem; }
+            .date-display { min-width: 250px; font-size: 1.1rem; }
+            .status-bar { flex-direction: column; gap: 10px; }
         }
 
         ::-webkit-scrollbar {
@@ -389,10 +463,6 @@
         ::-webkit-scrollbar-thumb {
             background: #d4af37;
             border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: #f4e5c2;
         }
 
         .footer-note {
@@ -410,23 +480,10 @@
             margin-top: 10px;
             font-style: italic;
         }
-
-        .today-indicator {
-            background: linear-gradient(135deg, #d4af37 0%, #f4e5c2 100%);
-            color: #1a1a2e;
-            padding: 5px 15px;
-            border-radius: 15px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            margin-left: 10px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
     </style>
 </head>
 <body>
     <div class="bg-shapes">
-        <div class="shape"></div>
         <div class="shape"></div>
         <div class="shape"></div>
     </div>
@@ -437,69 +494,47 @@
             <div class="subtitle">Perjalanan Rohani Harian</div>
         </header>
 
+        <div class="status-bar" id="statusBar" style="display: none;">
+            <div class="status-indicator">
+                <span class="status-dot" id="statusDot"></span>
+                <span id="statusText">Menghubungkan...</span>
+            </div>
+            <div class="status-indicator">
+                <span>Sumber: Alkitab.mobi & Rehobot.org</span>
+            </div>
+        </div>
+
         <div class="date-nav">
-            <button class="nav-btn" onclick="changeDate(-1)" title="Hari Sebelumnya">‹</button>
+            <button class="nav-btn" onclick="changeDate(-1)" id="prevBtn">‹</button>
             <div class="date-display">
                 <span id="currentDate">Memuat...</span>
                 <span id="todayBadge" class="today-indicator" style="display: none;">Hari Ini</span>
             </div>
-            <button class="nav-btn" onclick="changeDate(1)" title="Hari Berikutnya">›</button>
+            <button class="nav-btn" onclick="changeDate(1)" id="nextBtn">›</button>
         </div>
 
         <div class="tabs">
-            <button class="tab-btn active" onclick="switchTab('renungan')">Renungan Harian</button>
+            <button class="tab-btn active" onclick="switchTab('renungan')">Renungan Hari Ini</button>
             <button class="tab-btn" onclick="switchTab('quotes')">Quotes Hari Ini</button>
         </div>
 
         <div class="content-wrapper">
             <!-- Renungan Content -->
             <div id="renungan" class="content-card active">
-                <div class="card">
-                    <div class="renungan-header">
-                        <div class="renungan-title" id="renunganTitle">Renungan Hari Ini</div>
-                        <div class="verse-ref" id="verseRef">Memuat...</div>
-                    </div>
-                    
-                    <div class="intro-box" id="introText">
-                        Memuat renungan untuk hari ini...
-                    </div>
-
-                    <div class="renungan-content" id="renunganText">
-                        <p>Silakan tunggu sebentar...</p>
+                <div class="card" id="renunganCard">
+                    <div class="loading">
+                        <div class="spinner"></div>
+                        <p>Memuat konten...</p>
                     </div>
                 </div>
             </div>
 
             <!-- Quotes Content -->
             <div id="quotes" class="content-card">
-                <div class="card">
-                    <div class="quote-container">
-                        <div class="quote-icon">"</div>
-                        <div class="quote-text" id="quoteText1">
-                            Memuat quotes untuk hari ini...
-                        </div>
-                        <div class="quote-divider"></div>
-                        <div class="quote-author">— Quotes Today</div>
-                    </div>
-                </div>
-                
-                <div style="margin-top: 20px;">
-                    <div class="card" style="margin-bottom: 20px;">
-                        <div class="quote-container" style="padding: 30px 20px;">
-                            <div class="quote-icon" style="font-size: 2rem; margin-bottom: 15px;">"</div>
-                            <div class="quote-text" style="font-size: 1.3rem; margin-bottom: 20px;" id="quoteText2">
-                                Memuat quotes kedua...
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="quote-container" style="padding: 30px 20px;">
-                            <div class="quote-icon" style="font-size: 2rem; margin-bottom: 15px;">"</div>
-                            <div class="quote-text" style="font-size: 1.3rem; margin-bottom: 20px;" id="quoteText3">
-                                Memuat quotes ketiga...
-                            </div>
-                        </div>
+                <div class="card" id="quotesCard">
+                    <div class="loading">
+                        <div class="spinner"></div>
+                        <p>Memuat konten...</p>
                     </div>
                 </div>
             </div>
@@ -507,257 +542,328 @@
 
         <div class="update-info" id="updateInfo"></div>
         <div class="footer-note">
-            Renungan Embun Pagi | By Ps. Yanto Goutama
-            <br>
-            <small>Sumber ROC dan GSKI</small>
+            <span id="footerText">Menghubungkan ke sumber data...</span>
         </div>
     </div>
 
     <script>
-        // Database Renungan (bisa diperluas)
-        const renunganDatabase = [
-            {
-                verse: "2 Timotius 4:2",
-                intro: "Salah satu kebenaran dalam renungan hari ini adalah Allah mampu membawa pekerja Kristen melampaui aspirasi dan gagasannya sendiri, dan membentuk dia untuk maksud tujuan-Nya.",
-                content: `<p>Kita bukan hanya diselamatkan hanya untuk menjadi alat bagi Allah, melainkan untuk menjadi Anak-anak-Nya. Dia tidak menjadikan kita menjadi sekadar petugas rohani, tetapi menjadi <span class="highlight">pembawa amanat rohani</span>, dan amanat tersebut harus menjadi bagian dari diri kita. Anak Allah sendiri merupakan amanat Allah sendiri — "Perkataan-perkataan yang Kukatakan kepadamu adalah roh dan hidup" (Yohanes 6:63).</p>
-                         <p>Sebagai murid-Nya, hidup kita harus menjadi teladan suci dan realitas dari amanat yang kita sampaikan. Memang hati seseorang yang belum diselamatkan dapat juga melayani karena penugasan menghendaki demikian, tetapi diperlukan hati yang remuk oleh keinsafan dosa, dibaptis oleh Roh Kudus dan ditaklukkan ke dalam kendali maksud tujuan Allah untuk menjadikan hidup seseorang sebagai teladan yang suci dari amanat Allah.</p>
-                         <p>Ada perbedaan antara memberikan kesaksian dan berkhotbah. Seorang pengkhotbah adalah seseorang yang telah menerima panggilan Allah dan dengan tekun memakai seluruh tenaganya untuk menyatakan kebenaran Allah. (Akan tetapi) Allah membawa kita melampaui aspirasi dan gagasan kita sendiri, dan membentuk dan menempa kita untuk maksud tujuan-Nya bagi kita, seperti yang dikerjakan-Nya dalam kehidupan para murid setelah Pentakosta.</p>
-                         <p>Maksud dari Pentakosta bukanlah untuk mengajarkan sesuatu kepada para murid, melainkan membuat mereka menjadi inkarnasi atau penjelmaan dari khotbah mereka sehingga mereka secara harfiah menjadi amanat Allah dalam rupa manusia "... kamu akan menjadi saksi-saksi-Ku ..." (Kisah Para Rasul 1:8).</p>
-                         <p class="highlight">Izinkanlah Allah mendapat kebebasan penuh dalam hidup Anda bila Anda berbicara. Sebelum amanat Allah dapat membebaskan orang lain, pertama-tama pembebasan-Nya harus menjadi nyata dalam diri Anda. Kumpulkan bahan Anda dengan cermat, dan kemudian izinkan Allah untuk "membakar kata-kata Anda" bagi kemuliaan-Nya.</p>`
-            },
-            {
-                verse: "Yohanes 15:5",
-                intro: "Yesus berkata: 'Akulah pokok anggur dan kamulah ranting-rantingnya.' Hubungan ini menggambarkan ketergantungan total kita pada Dia.",
-                content: `<p>Tidak ada satupun dari kita yang dapat berdiri sendiri. Kita sering kali mencoba untuk menghasilkan buah rohani dengan kekuatan kita sendiri, namun <span class="highlight">hanya Kristus yang dapat menghasilkan buah yang kekal</span>.</p>
-                         <p>Setiap usaha manusia untuk mencapai kesucian tanpa ketergantungan pada Pokok Anggur akan berakhir dengan kegagalan. Bukan dengan usaha keras kita, tetapi dengan tinggal di dalam Dia.</p>
-                         <p>Bapa penggodam memang perlu, namun tujuannya bukan untuk menyakiti, melainkan untuk membentuk. Setiap pemangkasan adalah bukti kasih-Nya yang tak terbatas.</p>
-                         <p>Ketika kau merasa lemah dan hampir putus asa, ingatlah bahwa justru di situlah kuasa Allah sempurna dalam kelemahanmu. Jangan berusaha keluar dari pengaruh Roh Kudus, biarkan Dia bekerja dalam hidupmu.</p>`
-            },
-            {
-                verse: "Roma 12:1",
-                intro: "Pengorbanan yang hidup, kudus, dan berkenan kepada Allah adalah dasar dari pelayanan yang sejati.",
-                content: `<p>Allah tidak menginginkan pengorbanan mati, melainkan <span class="highlight">pengorbanan yang hidup</span>. Ini berarti seluruh kehidupan kita menjadi persembahan yang terus-menerus.</p>
-                         <p>Banyak orang Kristen bersedia untuk mati sebagai martir, namun enggan untuk hidup sebagai persembahan. Padahal, hidup keseharian yang ditaklukkan kepada Allah jauh lebih sulit daripada kematian yang sesaat.</p>
-                         <p>Transformasi pikiran adalah bukti dari pengorbanan yang hidup. Ketika kita berhenti berpikir sesuai dengan pola dunia ini, maka kita akan mengenal kehendak Allah yang sempurna.</p>`
-            },
-            {
-                verse: "Matius 11:28",
-                intro: "Datanglah kepada-Ku, semua yang letih lesu dan berbeban berat, Aku akan memberi kelegaan kepadamu.",
-                content: `<p>Yesus tidak mengatakan "Datanglah kepada gereja" atau "Datanglah kepada agama", tetapi <span class="highlight">"Datanglah kepada-Ku"</span>. Hanya di dalam Dia kita menemukan kelegaan yang sejati.</p>
-                         <p>Kelelahan rohani lebih berbahaya daripada kelelahan fisik. Ketika kita mencoba melayani Tuhan dengan kekuatan sendiri, kita akan jatuh ke dalam keletihan yang mendalam.</p>
-                         <p>Istirahat yang Yesus tawarkan bukanlah ketidak-aktifan, melainkan bekerja bersama-Nya dengan ringan. Kuk yang Dia berikan adalah ringan karena Dia yang memikul beban bersama kita.</p>`
-            },
-            {
-                verse: "2 Korintus 5:17",
-                intro: "Jadi siapa yang ada di dalam Kristus, ia adalah ciptaan baru; yang lama sudah berlalu, sesungguhnya yang baru sudah datang.",
-                content: `<p>Perubahan dalam Kristus bukanlah sekadar perbaikan diri, melainkan <span class="highlight">ciptaan baru</span>. Ini adalah pekerjaan Allah yang ajaib dalam hidup kita.</p>
-                         <p>Kita sering mencoba memperbaiki diri sendiri dengan aturan dan disiplin, namun Allah menggantikan nature kita dengan nature-Nya sendiri. Ini adalah pekerjaan Roh Kudus.</p>
-                         <p>Jangan melihat ke belakang dengan penyesalan, juga jangan melihat ke depan dengan takut. Lihatlah kepada Kristus yang membuat segala sesuatu baru.</p>`
-            },
-            {
-                verse: "Filipi 4:13",
-                intro: "Segala perkara dapat kutanggung di dalam Dia yang memberi kekuatan kepadaku.",
-                content: `<p>Ayat ini bukanlah janji untuk melakukan segala sesuatu yang kita inginkan, melainkan <span class="highlight">kekuatan untuk melakukan kehendak Allah</span> dalam setiap keadaan.</p>
-                         <p>Paulus menulis ini bukan dalam kemewahan, melainkan dalam penjara. Kekuatan sejati bukanlah terbebas dari masalah, melainkan mampu bersukacita di tengah masalah.</p>
-                         <p>Ketika kita mengira sudah mencapai batas, itulah saat kuasa Allah mulai bekerja. Jangan berkata "Aku tidak sanggup", tetapi katakan "Dia yang ada di dalamku lebih besar".</p>`
-            },
-            {
-                verse: "Mazmur 23:1",
-                intro: "Tuhan adalah gembalaku, takkan kekurangan aku. Kebenaran fundamental yang harus kita pegang setiap hari.",
-                content: `<p>Dalam dunia yang penuh ketidakpastian, kita memiliki <span class="highlight">Gembal yang baik</span> yang selalu menyediakan kebutuhan kita. Bukan keinginan kita, tetapi kebutuhan kita.</p>
-                         <p>Domba tidak perlu khawatir tentang masa depan, karena gembala yang memikul tanggung jawab. Begitu juga kita, jika sungguh-sungguh mempercayai Tuhan.</p>
-                         <p>Lembah kelam yang kita lewati bukanlah tanda ketidakpedulian Allah, melainkan tempat di mana kita belajar mengenal tongkat dan gada-Nya yang menghibur.</p>`
-            }
-        ];
-
-        // Database Quotes
-        const quotesDatabase = [
-            [
-                "Tuhan itu terlalu mulia untuk dibandingkan dengan apa pun dan siapa pun. Jadi seharusnya kita berani untuk melepaskan apa pun…",
-                "Mukjizat dilakukan dengan maksud supaya mengenal pribadi Sang Pembuat mukjizat, bukan untuk mengagumi mukjizat itu sendiri",
-                "Kristen militan hendak menunjukkan kelompok orang percaya kepada Tuhan Yesus yang memiliki karakteristik seperti militer, yaitu bersemangat tinggi, penuh gairah…"
-            ],
-            [
-                "Tantangan justru menjadi bukti bahwa pelayanan pekerjaan Tuhan berhadapan dengan kuasa yang tidak menghendaki perkembangannya.",
-                "Iman bukanlah penghilang rasa takut, melainkan kekuatan untuk melangkah meski takut.",
-                "Doa bukanlah mengubah kehendak Allah, melainkan menyesuaikan hati kita dengan kehendak-Nya."
-            ],
-            [
-                "Kasih sejati tidak pernah memaksa, ia selalu memberi kebebasan untuk memilih.",
-                "Kesucian bukanlah perfeksionisme, melainkan pemisahan diri untuk tujuan yang kudus.",
-                "Penderitaan adalah sekolah rohani di mana Allah mengajar hati kita untuk mendengar suara-Nya dengan lebih jelas."
-            ],
-            [
-                "Kerendahan hati adalah tanda orang yang mengenal Allah dengan benar.",
-                "Kesabaran bukanlah kemalasan, melainkan kekuatan menahan diri dalam pengendalian Roh Kudus.",
-                "Sukacita sejati tidak tergantung pada keadaan, melainkan pada hubungan dengan Sang Pencipta."
-            ],
-            [
-                "Pengampunan adalah kunci yang membuka pintu kemerdekaan rohani.",
-                "Ketika kita merasa lemah, itulah saat kuasa Allah sempurna dalam kelemahan kita.",
-                "Setiap pagi adalah kesempatan baru untuk mengalami kasih setia-Nya."
-            ],
-            [
-                "Kebenaran tanpa kasih adalah kekejaman, kasih tanpa kebenaran adalah kompromi.",
-                "Allah tidak mencari kemampuan kita, melainkan ketersediaan hati kita.",
-                "Pelayanan yang berkenan adalah pelayanan yang dilakukan dengan hati yang utuh kepada Tuhan."
-            ],
-            [
-                "Jangan menunggu merasa cukup rohani untuk melayani, mulailah melayani dan Anda akan tumbuh rohani.",
-                "Kemenangan rohani bukanlah penghindaran masalah, melainkan keteguhan iman di tengah masalah.",
-                "Hidup Kristen yang sehat ditandai dengan buah Roh yang terus bertumbuh."
-            ]
-        ];
-
-        let currentDate = new Date();
-        let currentOffset = 0; // 0 = hari ini, -1 = kemarin, 1 = besok
-
-        function getDayIndex(date) {
-            // Menggunakan tanggal sebagai index untuk rotasi konten
-            const start = new Date(2026, 2, 10); // 10 Maret 2026 sebagai start
-            const diffTime = date - start;
-            const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-            return ((diffDays % 7) + 7) % 7; // Rotasi mingguan (0-6)
-        }
-
-        function formatDate(date) {
-            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            return date.toLocaleDateString('id-ID', options);
-        }
-
-        function isToday(date) {
-            const today = new Date();
-            return date.toDateString() === today.toDateString();
-        }
-
-        function updateDisplay() {
-            const targetDate = new Date(currentDate);
-            targetDate.setDate(targetDate.getDate() + currentOffset);
+        /**
+         * ============================================================================
+         * KONFIGURASI SISTEM - EDIT BAGIAN INI
+         * ============================================================================
+         * 
+         * CARA 1: Hardcode API Key (Untuk penggunaan pribadi)
+         * Ganti nilai dibawah dengan API key Groq Anda yang diawali dengan "gsk_"
+         */
+        
+        const CONFIG = {
+            // GANTI INI DENGAN API KEY GROQ ANDA
+            // Dapatkan di: https://console.groq.com
+            GROQ_API_KEY: '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',
             
-            // Update tanggal display
-            document.getElementById('currentDate').textContent = formatDate(targetDate);
+            // Model yang digunakan
+            MODEL: 'llama-3.1-70b-versatile',
             
-            // Show/hide badge "Hari Ini"
-            const badge = document.getElementById('todayBadge');
-            if (currentOffset === 0) {
-                badge.style.display = 'inline-block';
-                badge.textContent = 'Hari Ini';
-            } else if (currentOffset === -1) {
-                badge.style.display = 'inline-block';
-                badge.textContent = 'Kemarin';
-            } else if (currentOffset === 1) {
-                badge.style.display = 'inline-block';
-                badge.textContent = 'Besok';
+            // URL Sumber
+            SOURCES: {
+                renungan: 'https://alkitab.mobi/renungan/roc',
+                quotes: 'https://rehobot.org/category/quote/'
+            },
+            
+            // API Endpoint
+            GROQ_API_URL: 'https://api.groq.com/openai/v1/chat/completions'
+        };
+
+        /**
+         * CARA 2: LocalStorage (Lebih aman, tidak terlihat di kode)
+         * Buka console browser (F12) dan ketik:
+         * localStorage.setItem('renungan_api_key', 'gsk_your_api_key_here');
+         * Lalu refresh halaman
+         */
+
+        // Inisialisasi API Key
+        let API_KEY = CONFIG.GROQ_API_KEY;
+        
+        // Cek localStorage jika hardcode kosong
+        if (!API_KEY) {
+            API_KEY = localStorage.getItem('renungan_api_key') || '';
+        }
+
+        // State
+        let currentViewDate = new Date();
+        let today = new Date();
+        let isLoading = false;
+
+        // Format helpers
+        const formatDateKey = (date) => date.toISOString().split('T')[0];
+        const formatDateDisplay = (date) => date.toLocaleDateString('id-ID', { 
+            weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' 
+        });
+        const isToday = (date) => date.toDateString() === today.toDateString();
+        const isFuture = (date) => date > today;
+
+        // Initialize
+        window.addEventListener('DOMContentLoaded', () => {
+            if (!API_KEY) {
+                showSetupNotice();
             } else {
-                badge.style.display = 'none';
-            }
-
-            // Get content index
-            const index = getDayIndex(targetDate);
-            
-            // Update Renungan
-            const renungan = renunganDatabase[index];
-            document.getElementById('verseRef').textContent = renungan.verse;
-            document.getElementById('introText').textContent = renungan.intro;
-            document.getElementById('renunganText').innerHTML = renungan.content;
-
-            // Update Quotes
-            const quotes = quotesDatabase[index];
-            document.getElementById('quoteText1').textContent = quotes[0];
-            document.getElementById('quoteText2').textContent = quotes[1];
-            document.getElementById('quoteText3').textContent = quotes[2];
-
-            // Update info
-            const now = new Date();
-            document.getElementById('updateInfo').textContent = 
-                `Konten untuk ${formatDate(targetDate)} • Diperbarui: ${now.toLocaleTimeString('id-ID')}`;
-
-            // Simpan ke localStorage untuk tracking
-            saveToCache(targetDate, renungan, quotes);
-        }
-
-        function changeDate(direction) {
-            currentOffset += direction;
-            
-            // Animasi transisi
-            const cards = document.querySelectorAll('.card');
-            cards.forEach(card => {
-                card.style.animation = 'none';
-                setTimeout(() => {
-                    card.style.animation = 'fadeInUp 0.6s ease-out';
-                }, 10);
-            });
-
-            updateDisplay();
-        }
-
-        function switchTab(tabName) {
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            event.target.classList.add('active');
-
-            document.querySelectorAll('.content-card').forEach(card => {
-                card.classList.remove('active');
-            });
-            document.getElementById(tabName).classList.add('active');
-        }
-
-        // Cache system
-        function saveToCache(date, renungan, quotes) {
-            const cacheKey = 'content_' + date.toISOString().split('T')[0];
-            const cacheData = {
-                date: date.toISOString(),
-                renungan: renungan,
-                quotes: quotes,
-                savedAt: new Date().toISOString()
-            };
-            localStorage.setItem(cacheKey, JSON.stringify(cacheData));
-        }
-
-        function loadFromCache(date) {
-            const cacheKey = 'content_' + date.toISOString().split('T')[0];
-            const cached = localStorage.getItem(cacheKey);
-            return cached ? JSON.parse(cached) : null;
-        }
-
-        // Auto-update system
-        function checkForNewDay() {
-            const now = new Date();
-            const lastCheck = localStorage.getItem('lastCheck');
-            
-            if (lastCheck) {
-                const lastDate = new Date(lastCheck);
-                if (lastDate.getDate() !== now.getDate() || 
-                    lastDate.getMonth() !== now.getMonth() || 
-                    lastDate.getFullYear() !== now.getFullYear()) {
-                    // Hari baru! Reset ke hari ini
-                    currentOffset = 0;
-                    currentDate = new Date();
-                    updateDisplay();
-                    console.log('Auto-update: Hari baru terdeteksi, konten diperbarui');
-                }
-            }
-            
-            localStorage.setItem('lastCheck', now.toISOString());
-        }
-
-        // Check setiap menit untuk perubahan hari
-        setInterval(checkForNewDay, 60000);
-
-        // Check saat tab menjadi visible lagi
-        document.addEventListener('visibilitychange', function() {
-            if (!document.hidden) {
-                checkForNewDay();
+                document.getElementById('statusBar').style.display = 'flex';
+                initApp();
             }
         });
 
-        // Init
-        checkForNewDay();
-        updateDisplay();
+        function showSetupNotice() {
+            document.getElementById('renunganCard').innerHTML = `
+                <div class="setup-notice">
+                    <h3>⚙️ Konfigurasi Diperlukan</h3>
+                    <p>Sistem memerlukan API key untuk mengambil konten dari sumber.</p>
+                    <p style="font-size: 0.8rem; margin-top: 20px; color: #888;">
+                        Silakan hubungi administrator untuk mengaktifkan layanan ini.
+                    </p>
+                </div>
+            `;
+            document.getElementById('quotesCard').innerHTML = `
+                <div class="setup-notice">
+                    <p>Layanan tidak tersedia saat ini.</p>
+                </div>
+            `;
+            document.getElementById('footerText').textContent = 'Sistem belum dikonfigurasi';
+            document.getElementById('currentDate').textContent = formatDateDisplay(new Date());
+        }
+
+        function initApp() {
+            updateStatus('loading', 'Menghubungkan...');
+            loadContent();
+            
+            // Auto refresh setiap 6 jam
+            setInterval(() => {
+                if (isToday(currentViewDate)) loadContent();
+            }, 6 * 60 * 60 * 1000);
+        }
+
+        function updateStatus(type, text) {
+            const dot = document.getElementById('statusDot');
+            const txt = document.getElementById('statusText');
+            
+            dot.className = 'status-dot ' + (type === 'active' ? 'active' : '');
+            txt.textContent = text;
+        }
+
+        async function fetchWithGroq(type, date) {
+            const url = CONFIG.SOURCES[type];
+            const dateStr = formatDateDisplay(date);
+            
+            const prompt = type === 'renungan' 
+                ? `Ambil konten renungan Oswald Chambers (ROC) untuk tanggal ${dateStr} dari website ${url}. Ekstrak: verse (ayat dasar), intro (paragraf pengantar), content (isi renungan lengkap dalam format HTML paragraph). Jika tanggal tidak tersedia, ambil renungan terbaru. Kembalikan dalam JSON format.`
+                : `Ambil 3 quotes rohani terbaru dari website ${url}. Kembalikan dalam JSON format: { "quotes": ["quote1", "quote2", "quote3"] }`;
+
+            const response = await fetch(CONFIG.GROQ_API_URL, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${API_KEY}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    model: CONFIG.MODEL,
+                    messages: [
+                        {
+                            role: 'system',
+                            content: 'Anda adalah asisten yang mengambil konten dari website dan mengembalikannya dalam format JSON terstruktur.'
+                        },
+                        {
+                            role: 'user',
+                            content: prompt
+                        }
+                    ],
+                    temperature: 0.1,
+                    max_tokens: 4000
+                })
+            });
+
+            if (!response.ok) {
+                const error = await response.json();
+                throw new Error(error.error?.message || 'Request failed');
+            }
+
+            const data = await response.json();
+            const content = data.choices[0].message.content;
+            
+            // Parse JSON dari response
+            const jsonMatch = content.match(/\{[\s\S]*\}/);
+            return jsonMatch ? JSON.parse(jsonMatch[0]) : JSON.parse(content);
+        }
+
+        async function loadContent() {
+            if (isLoading) return;
+            isLoading = true;
+
+            const dateKey = formatDateKey(currentViewDate);
+            
+            // Update UI
+            document.getElementById('currentDate').textContent = formatDateDisplay(currentViewDate);
+            
+            const badge = document.getElementById('todayBadge');
+            badge.style.display = 'inline-block';
+            badge.textContent = isToday(currentViewDate) ? 'Hari Ini' : 
+                               isFuture(currentViewDate) ? 'Mendatang' : 'Arsip';
+            
+            document.getElementById('nextBtn').disabled = isFuture(currentViewDate);
+
+            // Check cache (24 jam)
+            const cachedRenungan = localStorage.getItem('renungan_' + dateKey);
+            const cachedQuotes = localStorage.getItem('quotes_' + dateKey);
+            const cacheTime = localStorage.getItem('cache_time_' + dateKey);
+            const isCacheValid = cacheTime && (new Date() - new Date(cacheTime)) < (24 * 60 * 60 * 1000);
+
+            if (cachedRenungan && cachedQuotes && isCacheValid) {
+                displayRenungan(JSON.parse(cachedRenungan));
+                displayQuotes(JSON.parse(cachedQuotes));
+                updateStatus('active', 'Terhubung (cache)');
+                document.getElementById('updateInfo').textContent = 'Terakhir diperbarui: ' + new Date(cacheTime).toLocaleString('id-ID');
+                document.getElementById('footerText').textContent = 'Sumber: ROC & GSKI • Data dari cache';
+                isLoading = false;
+                return;
+            }
+
+            // Fetch from API
+            updateStatus('loading', 'Mengambil data...');
+            
+            document.getElementById('renunganCard').innerHTML = `
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <p>Mengambil renungan...</p>
+                </div>
+            `;
+            
+            document.getElementById('quotesCard').innerHTML = `
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <p>Mengambil quotes...</p>
+                </div>
+            `;
+
+            try {
+                const [renunganData, quotesData] = await Promise.all([
+                    fetchWithGroq('renungan', currentViewDate),
+                    fetchWithGroq('quotes', currentViewDate)
+                ]);
+
+                if (renunganData) {
+                    displayRenungan(renunganData);
+                    localStorage.setItem('renungan_' + dateKey, JSON.stringify(renunganData));
+                }
+                
+                if (quotesData) {
+                    const quotes = quotesData.quotes || quotesData;
+                    displayQuotes(quotes);
+                    localStorage.setItem('quotes_' + dateKey, JSON.stringify(quotes));
+                }
+
+                localStorage.setItem('cache_time_' + dateKey, new Date().toISOString());
+                updateStatus('active', 'Terhubung');
+                document.getElementById('updateInfo').textContent = 'Diperbarui: ' + new Date().toLocaleString('id-ID');
+                document.getElementById('footerText').textContent = 'Sumber: ROC & GSKI • Data real-time';
+
+            } catch (error) {
+                console.error('Error:', error);
+                updateStatus('', 'Error koneksi');
+                
+                if (cachedRenungan) {
+                    displayRenungan(JSON.parse(cachedRenungan));
+                    document.getElementById('renunganCard').innerHTML += `
+                        <div style="margin-top: 20px; padding: 15px; background: rgba(231, 76, 60, 0.1); border-radius: 10px; font-size: 0.85rem; color: #e74c3c; text-align: center;">
+                            Mode offline - menggunakan data tersimpan
+                        </div>
+                    `;
+                } else {
+                    document.getElementById('renunganCard').innerHTML = `
+                        <div class="error-message">
+                            <p>Gagal mengambil data</p>
+                            <button class="retry-btn" onclick="loadContent()">Coba Lagi</button>
+                        </div>
+                    `;
+                }
+
+                if (cachedQuotes) {
+                    displayQuotes(JSON.parse(cachedQuotes));
+                }
+            }
+
+            isLoading = false;
+        }
+
+        function displayRenungan(data) {
+            document.getElementById('renunganCard').innerHTML = `
+                <div class="renungan-header">
+                    <div class="renungan-title">Renungan Oswald Chambers</div>
+                    <div class="verse-ref">${data.verse || '-'}</div>
+                </div>
+                <div class="intro-box">${data.intro || 'Renungan hari ini'}</div>
+                <div class="renungan-content">${data.content || '<p>Konten tidak tersedia</p>'}</div>
+                <div class="source-link">
+                    <a href="${CONFIG.SOURCES.renungan}" target="_blank">Buka di Alkitab.mobi →</a>
+                </div>
+            `;
+        }
+
+        function displayQuotes(quotes) {
+            if (!Array.isArray(quotes)) quotes = [quotes];
+            
+            let html = `
+                <div class="quote-container">
+                    <div class="quote-icon">"</div>
+                    <div class="quote-text">${quotes[0] || 'Quotes tidak tersedia'}</div>
+                    <div class="quote-divider"></div>
+                    <div class="quote-author">— Rehobot Church</div>
+                </div>
+            `;
+
+            for (let i = 1; i < quotes.length && i < 3; i++) {
+                html += `
+                    <div style="margin-top: 20px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1);">
+                        <div class="quote-container" style="padding: 20px;">
+                            <div class="quote-icon" style="font-size: 2rem; margin-bottom: 10px;">"</div>
+                            <div class="quote-text" style="font-size: 1.3rem;">${quotes[i]}</div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            html += `
+                <div class="source-link" style="margin-top: 30px;">
+                    <a href="${CONFIG.SOURCES.quotes}" target="_blank">Lihat di Rehobot.org →</a>
+                </div>
+            `;
+
+            document.getElementById('quotesCard').innerHTML = html;
+        }
+
+        function changeDate(direction) {
+            const newDate = new Date(currentViewDate);
+            newDate.setDate(newDate.getDate() + direction);
+            
+            if (isFuture(newDate) && direction > 0) return;
+            
+            currentViewDate = newDate;
+            
+            // Animation
+            document.querySelectorAll('.card').forEach(card => {
+                card.style.animation = 'none';
+                setTimeout(() => card.style.animation = 'fadeInUp 0.6s ease-out', 10);
+            });
+            
+            loadContent();
+        }
+
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            document.querySelectorAll('.content-card').forEach(card => card.classList.remove('active'));
+            document.getElementById(tabName).classList.add('active');
+        }
 
         // Keyboard navigation
-        document.addEventListener('keydown', function(e) {
+        document.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowLeft') changeDate(-1);
             if (e.key === 'ArrowRight') changeDate(1);
         });
