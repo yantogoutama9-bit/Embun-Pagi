@@ -340,15 +340,31 @@
         <div class="footer-verse">"Firman-Mu pelita bagi kakiku dan terang bagi jalanku." — Mazmur 119:105</div>
     </footer>
 
-    <script>
+        <script>
         // KONFIGURASI TANGGAL RENUNGAN
-        // Format: YYYY-MM-DD
-        const RENUNGAN_DATE = '2026-03-14'; // ← GANTI TANGGAL INI SETIAP HARI
+        // Format: 'YYYY-MM-DD' (tahun-bulan-tanggal)
+        const RENUNGAN_DATE = '2026-03-15'; // ← GANTI INI SETIAP HARI
+        
+        // Fungsi untuk mendapatkan tanggal hari ini dalam format YYYY-MM-DD (local time)
+        function getLocalDateString(date) {
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
         
         // Fungsi untuk mengecek apakah konten boleh ditampilkan
         function checkAvailability() {
             const now = new Date();
-            const currentDateStr = now.toISOString().split('T')[0];
+            const currentDateStr = getLocalDateString(now);
+            
+            // Parse tanggal renungan
+            const [renYear, renMonth, renDay] = RENUNGAN_DATE.split('-').map(Number);
+            const renunganDate = new Date(renYear, renMonth - 1, renDay);
+            
+            // Format tanggal untuk display (Bahasa Indonesia)
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const renunganDateDisplay = renunganDate.toLocaleDateString('id-ID', options);
             
             // Untuk testing/editor mode: tambahkan ?edit=true di URL
             const urlParams = new URLSearchParams(window.location.search);
@@ -356,48 +372,38 @@
             
             if (isEditMode) {
                 document.getElementById('editorMode').classList.add('active');
-                document.getElementById('currentDate').textContent = formatDateIndonesia(now);
+                document.getElementById('currentDate').textContent = renunganDateDisplay;
                 return true;
             }
             
-            // Cek apakah sudah lewat tanggal renungan
+            // Bandingkan string tanggal secara langsung (tanpa masalah timezone)
             if (currentDateStr < RENUNGAN_DATE) {
                 // Belum waktunya (masih besok)
                 document.body.innerHTML = `
-                    <div style="display: flex; justify-content: center; align-items: center; height: 100vh; flex-direction: column; font-family: 'Cormorant Garamond', serif; color: #666; text-align: center; padding: 20px;">
+                    <div style="display: flex; justify-content: center; align-items: center; height: 100vh; flex-direction: column; font-family: 'Cormorant Garamond', serif; color: #666; text-align: center; padding: 20px; background: #faf9f7;">
                         <div style="font-size: 3rem; margin-bottom: 20px;">🌅</div>
-                        <h1 style="font-weight: 400; margin-bottom: 15px;">Renungan Belum Tersedia</h1>
-                        <p>Renungan untuk tanggal ini akan tersedia pada pukul 00:00 WIB.</p>
-                        <p style="margin-top: 10px; font-size: 0.9rem; color: #999;">Tanggal renungan: ${formatDateIndonesia(new Date(RENUNGAN_DATE))}</p>
+                        <h1 style="font-weight: 400; margin-bottom: 15px; font-size: 1.8rem;">Renungan Belum Tersedia</h1>
+                        <p style="margin-bottom: 10px;">Renungan untuk tanggal ini akan tersedia pada pukul 00:00 WIB.</p>
+                        <p style="font-size: 0.9rem; color: #999; font-style: italic;">Tanggal renungan: ${renunganDateDisplay}</p>
+                        <p style="font-size: 0.8rem; color: #bbb; margin-top: 20px;">Sekarang: ${now.toLocaleDateString('id-ID', options)}</p>
                     </div>
                 `;
                 return false;
             } else if (currentDateStr > RENUNGAN_DATE) {
-                // Sudah lewat (kemarin), tampilkan pesan bahwa ini renungan lama
-                document.getElementById('currentDate').textContent = formatDateIndonesia(new Date(RENUNGAN_DATE));
+                // Sudah lewat (kemarin atau lebih lama)
+                document.getElementById('currentDate').textContent = renunganDateDisplay;
                 
                 // Tambahkan banner bahwa ini renungan lama
                 const banner = document.createElement('div');
-                banner.style.cssText = 'background: #fff3cd; color: #856404; padding: 15px; text-align: center; font-size: 0.85rem; border-bottom: 1px solid #ffeaa7;';
-                banner.innerHTML = '⚠️ Ini adalah renungan untuk tanggal ' + formatDateIndonesia(new Date(RENUNGAN_DATE)) + '. Renungan harian hanya tersedia untuk hari tersebut.';
+                banner.style.cssText = 'background: #fff3cd; color: #856404; padding: 15px; text-align: center; font-size: 0.85rem; border-bottom: 1px solid #ffeaa7; font-family: Inter, sans-serif;';
+                banner.innerHTML = `⚠️ Ini adalah renungan untuk tanggal ${renunganDateDisplay}. Renungan harian hanya tersedia untuk hari tersebut.`;
                 document.body.insertBefore(banner, document.body.firstChild);
                 return true;
             } else {
-                // Hari yang tepat
-                document.getElementById('currentDate').textContent = formatDateIndonesia(now);
+                // Hari yang tepat (currentDateStr === RENUNGAN_DATE)
+                document.getElementById('currentDate').textContent = renunganDateDisplay;
                 return true;
             }
-        }
-        
-        // Format tanggal ke bahasa Indonesia
-        function formatDateIndonesia(date) {
-            const options = { 
-                weekday: 'long', 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric' 
-            };
-            return date.toLocaleDateString('id-ID', options);
         }
         
         // Inisialisasi
@@ -421,6 +427,3 @@
         
         setupMidnightRefresh();
     </script>
-
-</body>
-</html>
