@@ -3,555 +3,390 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Renungan & Quotes Harian - Data Asli</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <title>Renungan Harian Embun Pagi</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap');
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
-        :root {
-            --primary: #2c3e50;
-            --secondary: #8b7355;
-            --accent: #d4a574;
-            --bg: #faf8f5;
-            --card: #ffffff;
-            --text: #2c3e50;
-            --text-light: #5d6d7e;
-            --shadow: rgba(0,0,0,0.08);
-            --error: #e74c3c;
-            --success: #27ae60;
-        }
-
+        
         body {
             font-family: 'Inter', sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
+            background: linear-gradient(135deg, #faf9f7 0%, #f5f3f0 100%);
+            color: #2c2c2c;
+            line-height: 1.8;
             min-height: 100vh;
-            background-image: 
-                radial-gradient(circle at 20% 50%, rgba(212, 165, 116, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(139, 115, 85, 0.05) 0%, transparent 50%);
+            display: flex;
+            flex-direction: column;
         }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
+        
+        /* Header */
         header {
             text-align: center;
-            padding: 40px 20px;
-            background: linear-gradient(135deg, var(--primary) 0%, #34495e 100%);
-            color: white;
-            margin-bottom: 40px;
-            position: relative;
-            overflow: hidden;
+            padding: 60px 20px 40px;
+            background: rgba(255,255,255,0.6);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
         }
-
-        header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: repeating-linear-gradient(
-                45deg,
-                transparent,
-                transparent 10px,
-                rgba(255,255,255,0.03) 10px,
-                rgba(255,255,255,0.03) 20px
-            );
-            animation: shimmer 20s linear infinite;
+        
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            color: #3d3d3d;
+            margin-bottom: 8px;
         }
-
-        @keyframes shimmer {
-            0% { transform: translate(-50%, -50%) rotate(0deg); }
-            100% { transform: translate(-50%, -50%) rotate(360deg); }
-        }
-
-        header h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            position: relative;
-            z-index: 1;
-        }
-
-        header p {
-            opacity: 0.9;
+        
+        .tagline {
+            font-size: 0.85rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #888;
             font-weight: 300;
-            position: relative;
-            z-index: 1;
         }
-
-        .source-badge {
-            display: inline-block;
-            background: rgba(46, 204, 113, 0.3);
-            color: #fff;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.75em;
-            margin-left: 10px;
-            font-weight: 600;
+        
+        .date-display {
+            margin-top: 20px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            color: #666;
+            font-style: italic;
         }
-
-        .date-nav {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
+        
+        /* Main Content */
+        main {
+            flex: 1;
+            max-width: 680px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 60px 30px;
+        }
+        
+        /* Renungan Section */
+        .renungan-section {
+            background: #fff;
+            padding: 50px;
+            border-radius: 4px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
             margin-bottom: 40px;
-            flex-wrap: wrap;
-        }
-
-        .date-btn {
-            background: var(--card);
-            border: 2px solid var(--accent);
-            color: var(--secondary);
-            padding: 12px 24px;
-            border-radius: 30px;
-            cursor: pointer;
-            font-family: 'Inter', sans-serif;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            box-shadow: 0 4px 15px var(--shadow);
-            font-size: 1em;
-        }
-
-        .date-btn:hover {
-            background: var(--accent);
-            color: white;
-            transform: translateY(-2px);
-        }
-
-        .date-btn.active {
-            background: var(--secondary);
-            color: white;
-            border-color: var(--secondary);
-        }
-
-        .date-btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .current-date {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.3em;
-            color: var(--secondary);
-            font-weight: 600;
-            min-width: 300px;
-            text-align: center;
-        }
-
-        .content-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-
-        @media (min-width: 968px) {
-            .content-grid {
-                grid-template-columns: 1.2fr 1fr;
-            }
-        }
-
-        .card {
-            background: var(--card);
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 10px 40px var(--shadow);
             position: relative;
             overflow: hidden;
-            transition: transform 0.3s ease;
         }
-
-        .card:hover {
-            transform: translateY(-5px);
-        }
-
-        .card::before {
+        
+        .renungan-section::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, var(--accent), var(--secondary));
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #d4c4b0, #b8a898, #d4c4b0);
         }
-
-        .card-header {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 25px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid rgba(139, 115, 85, 0.2);
-        }
-
-        .icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--accent), var(--secondary));
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.5em;
-            flex-shrink: 0;
-        }
-
-        .card-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5em;
-            color: var(--primary);
-        }
-
-        .card-subtitle {
-            color: var(--text-light);
-            font-size: 0.9em;
-            margin-top: 2px;
-        }
-
-        .data-source {
-            font-size: 0.75em;
-            color: var(--success);
-            margin-top: 4px;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .data-source::before {
-            content: '●';
-            color: var(--success);
-        }
-
-        .renungan-content h3 {
-            font-family: 'Playfair Display', serif;
-            color: var(--secondary);
-            font-size: 1.3em;
-            margin-bottom: 15px;
-            font-style: italic;
-        }
-
-        .verse {
-            background: linear-gradient(135deg, #f8f4f0, #f0e9e2);
-            padding: 20px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            border-left: 4px solid var(--accent);
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
-            color: var(--secondary);
-            font-size: 1.1em;
-            line-height: 1.8;
-        }
-
-        .intro {
-            background: rgba(212, 165, 116, 0.1);
-            padding: 20px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            font-size: 0.95em;
-            color: var(--text-light);
-            border: 1px solid rgba(212, 165, 116, 0.2);
-        }
-
-        .intro::before {
-            content: 'Intro';
-            display: block;
-            font-weight: 600;
-            color: var(--accent);
-            margin-bottom: 8px;
+        
+        .section-label {
+            font-size: 0.75rem;
+            letter-spacing: 3px;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            font-size: 0.8em;
-        }
-
-        .content-text {
-            line-height: 1.8;
-            color: var(--text);
-            text-align: justify;
-        }
-
-        .content-text p {
-            margin-bottom: 15px;
-        }
-
-        .quote-card {
-            background: linear-gradient(135deg, var(--primary), #2c3e50);
-            color: white;
-            border-radius: 20px;
-            padding: 40px;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
-            margin-bottom: 20px;
-        }
-
-        .quote-card::before {
-            content: '"';
-            position: absolute;
-            top: -20px;
-            left: 20px;
-            font-family: 'Playfair Display', serif;
-            font-size: 150px;
-            opacity: 0.1;
-            line-height: 1;
-        }
-
-        .quote-text {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.4em;
-            line-height: 1.6;
-            margin-bottom: 20px;
-            position: relative;
-            z-index: 1;
-            font-style: italic;
-        }
-
-        .quote-author {
-            text-align: right;
-            opacity: 0.8;
+            color: #b8a898;
+            margin-bottom: 30px;
             font-weight: 500;
-            position: relative;
-            z-index: 1;
         }
-
-        .quotes-list {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .mini-quote {
-            background: rgba(44, 62, 80, 0.05);
-            padding: 20px;
-            border-radius: 12px;
-            border-left: 3px solid var(--accent);
-            transition: all 0.3s ease;
-        }
-
-        .mini-quote:hover {
-            background: rgba(44, 62, 80, 0.1);
-            transform: translateX(5px);
-        }
-
-        .mini-quote-text {
-            font-size: 0.95em;
-            line-height: 1.6;
-            margin-bottom: 8px;
+        
+        .verse-ref {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            color: #5c5c5c;
+            margin-bottom: 25px;
             font-style: italic;
-            color: var(--text);
+            border-left: 2px solid #d4c4b0;
+            padding-left: 20px;
         }
-
-        .mini-quote-source {
-            font-size: 0.8em;
-            color: var(--text-light);
-            text-align: right;
+        
+        .renungan-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.25rem;
+            line-height: 2;
+            color: #3d3d3d;
+            text-align: justify;
+            margin-bottom: 30px;
         }
-
-        .loading {
+        
+        .renungan-text p {
+            margin-bottom: 1.2em;
+        }
+        
+        .prayer {
+            background: #faf9f7;
+            padding: 25px;
+            border-radius: 2px;
+            font-style: italic;
+            color: #555;
+            border-left: 3px solid #d4c4b0;
+            margin-top: 30px;
+        }
+        
+        .prayer-label {
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #b8a898;
+            margin-bottom: 10px;
+            font-style: normal;
+            font-weight: 500;
+        }
+        
+        /* Quote Section */
+        .quote-section {
             text-align: center;
             padding: 40px;
-            color: var(--text-light);
+            background: transparent;
         }
-
-        .spinner {
-            width: 40px;
-            height: 40px;
-            border: 3px solid rgba(139, 115, 85, 0.2);
-            border-top-color: var(--accent);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 15px;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        .error-message {
-            background: rgba(231, 76, 60, 0.1);
-            border: 1px solid var(--error);
-            color: var(--error);
-            padding: 20px;
-            border-radius: 12px;
-            text-align: center;
-        }
-
-        .server-status {
-            background: rgba(46, 204, 113, 0.1);
-            border: 1px solid var(--success);
-            color: var(--success);
-            padding: 15px;
-            border-radius: 12px;
+        
+        .quote-icon {
+            font-size: 3rem;
+            color: #d4c4b0;
+            line-height: 1;
             margin-bottom: 20px;
+            opacity: 0.6;
+        }
+        
+        .quote-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-style: italic;
+            color: #4a4a4a;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .quote-author {
+            font-size: 0.9rem;
+            color: #888;
+            letter-spacing: 1px;
+            font-weight: 400;
+        }
+        
+        .divider {
+            width: 40px;
+            height: 1px;
+            background: #d4c4b0;
+            margin: 30px auto;
+        }
+        
+        /* Footer */
+        footer {
             text-align: center;
-            font-size: 0.9em;
+            padding: 40px 20px;
+            background: #f5f3f0;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            font-size: 0.8rem;
+            color: #999;
+            letter-spacing: 1px;
         }
-
-        .refresh-btn {
+        
+        .copyright {
+            margin-bottom: 10px;
+        }
+        
+        .footer-verse {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            color: #aaa;
+            font-size: 0.9rem;
+            margin-top: 15px;
+        }
+        
+        /* Editor Mode Indicator */
+        .editor-mode {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: var(--secondary);
-            color: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            border: none;
-            cursor: pointer;
-            font-size: 1.5em;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 100;
+            top: 20px;
+            right: 20px;
+            background: #fff;
+            padding: 10px 20px;
+            border-radius: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            color: #666;
+            z-index: 1000;
+            display: none;
         }
-
-        .refresh-btn:hover {
-            transform: scale(1.1) rotate(180deg);
-            background: var(--accent);
+        
+        .editor-mode.active {
+            display: block;
         }
-
-        .fade-in {
-            animation: fadeIn 0.6s ease-in;
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .renungan-section {
+                padding: 30px;
+            }
+            
+            .renungan-text {
+                font-size: 1.1rem;
+            }
+            
+            .quote-text {
+                font-size: 1.2rem;
+            }
+            
+            .logo {
+                font-size: 1.8rem;
+            }
         }
-
+        
+        /* Print styles */
+        @media print {
+            .editor-mode {
+                display: none !important;
+            }
+        }
+        
+        /* Animations */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 1.8em;
-            }
-            
-            .card {
-                padding: 25px;
-            }
-            
-            .quote-text {
-                font-size: 1.1em;
-            }
-            
-            .date-nav {
-                gap: 10px;
-            }
-            
-            .date-btn {
-                padding: 10px 16px;
-                font-size: 0.9em;
-            }
-            
-            .current-date {
-                font-size: 1.1em;
-                min-width: auto;
-                order: -1;
-                width: 100%;
-                margin-bottom: 10px;
-            }
+        
+        .renungan-section, .quote-section {
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        /* Hidden content for future dates */
+        .content-locked {
+            display: none;
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Renungan & Quotes Harian</h1>
-        <p>Data Asli dari ROC & Rehobot <span class="source-badge">LIVE SCRAPE</span></p>
-    </header>
 
-    <div class="container">
-        <div class="date-nav">
-            <button class="date-btn" id="btnPrev" onclick="changeDate(-1)">
-                <span>←</span> Kemarin
-            </button>
-            <div class="current-date" id="currentDate"></div>
-            <button class="date-btn" id="btnNext" onclick="changeDate(1)">
-                Besok <span>→</span>
-            </button>
-            <button class="date-btn" id="btnToday" onclick="goToToday()">
-                Hari Ini
-            </button>
-        </div>
-
-        <div id="serverStatus"></div>
-
-        <div class="content-grid">
-            <div class="card" id="renunganCard">
-                <div class="card-header">
-                    <div class="icon">📖</div>
-                    <div>
-                        <div class="card-title">Renungan Oswald Chambers</div>
-                        <div class="card-subtitle">My Utmost for His Highest</div>
-                        <div class="data-source" id="renunganSource">Menghubungkan ke server...</div>
-                    </div>
-                </div>
-                <div id="renunganContent">
-                    <div class="loading">
-                        <div class="spinner"></div>
-                        <p>Memuat renungan dari alkitab.mobi...</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card" id="quotesCard">
-                <div class="card-header">
-                    <div class="icon" style="background: linear-gradient(135deg, #2c3e50, #34495e);">💬</div>
-                    <div>
-                        <div class="card-title">Quotes Rehobot</div>
-                        <div class="card-subtitle">Kumpulan quotes rohani</div>
-                        <div class="data-source" id="quotesSource">Menghubungkan ke server...</div>
-                    </div>
-                </div>
-                <div id="quotesContent">
-                    <div class="loading">
-                        <div class="spinner"></div>
-                        <p>Memuat quotes dari rehobot.org...</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <!-- Editor Mode Indicator -->
+    <div class="editor-mode" id="editorMode">
+        ✎ Mode Editor Aktif
     </div>
 
-    <button class="refresh-btn" onclick="refreshData()" title="Refresh Data">↻</button>
+    <header>
+        <div class="logo">EMBUN PAGI</div>
+        <div class="tagline">Renungan Harian</div>
+        <div class="date-display" id="currentDate"></div>
+    </header>
+
+    <main>
+        <!-- RENUNGAN HARIAN -->
+        <section class="renungan-section" id="renunganContainer">
+            <div class="section-label">Renungan Hari Ini</div>
+            
+            <!-- EDIT: Ayat dasar -->
+            <div class="verse-ref" id="verseRef">
+                "... orang-orang yang mengikuti Dia dari belakang merasa takut."
+                <br><strong>Markus 10:32</strong>
+            </div>
+            
+            <!-- EDIT: Isi Renungan -->
+            <div class="renungan-text" id="renunganText">
+                <p>
+                    Setiap orang pernah seperti murid dalam ayat di atas, dalam mengikut Yesus -- cemas dan takut. Pada awal kehidupan kita dengan Yesus Kristus, kita yakin bahwa kita mengetahui semua hal tentang ikut Yesus. Saat itu sesuatu yang menyenangkan “meninggalkan segala sesuatu” dan menyandarkan diri pada-Nya dalam suatu pernyataan kasih yang tidak mengenal rasa takut. Akan tetapi, kemudian ada saat, kita tidak begitu yakin atau pasti. Yesus sepertinya berada jauh di depan kita dan tampaknya berbeda dan rasanya tidak kenal, asing dengan Dia. Seperti digambarkan dalam ayat di atas -- “Yesus berjalan di depan. Murid-murid merasa cemas” (Markus 10:32)).
+                </p>
+                <p>
+                    Memang ada satu aspek tentang Yesus yang menjadikan seorang murid tawar hati dan membuat seluruh kehidupan rohaninya tersengal-sengal. Yesus, Pribadi yang luar biasa ini, yang wajah-Nya “seperti batu api” (Yesaya 50:7, NKJV) melangkah melesat di depan saya, dan menimbulkan rasa takut pada diri saya. Dia tidak lagi seperti Penasihat dan Sahabat saya. Dia sepertinya mempunyai sudut pandang yang tentangnya saya tidak mengetahui apa-apa. Hal yang dapat saya lakukan hanyalah berdiri dan menatap-Nya dengan rasa heran bukan main. Pada mulanya, saya yakin bahwa saya memahami-Nya, tetapi kini saya tidak pasti. Saya mulai menyadari adanya jarak antara Yesus dan saya dan rasanya saya tidak lagi akrab dengan Dia. Saya tidak tahu ke mana Dia pergi dan tujuan-Nya menjadi terasa jauh dan asing.
+                </p>
+                <p>
+                    Melalui hal itu, Yesus Kristus harus menggali dalam-dalam setiap dosa dan dukacita yang dapat dialami manusia. Itulah yang membuat Dia tampaknya tidak kita kenal. Bila kita melihat aspek ini tentang Dia, kita menyadari bahwa kita sesungguhnya tidak mengenal-Nya. Kita tidak mengenal bahkan satu pun sifat hidup-Nya, dan kita tidak mengetahui bagaimana cara untuk mulai mengikut Dia. Dia berada jauh di depan kita, seorang Pemimpin yang tampaknya benar-benar tidak kita kenal, dan kita tidak mempunyai persahabatan dengan Dia.
+                </p>
+                <p>
+                    Semuanya itu adalah bagian dari disiplin kecemasan/ketakutan dari Tuhan, suatu pelajaran penting yang harus dipelajari oleh seorang murid. Bahayanya adalah kita cenderung menoleh ke belakang pada saat-saat kepatuhan kita (dahulu) dan pada pengorbanan-pengorbanan yang pernah kita berikan kepada Allah, dalam usaha membangkitkan kembali semangat kita kepada-Nya agar tetap kuat (lihat Yesaya 1:10-11). Akan tetapi, ketika awan gelap kecemasan datang, hadapilah itu sampai berakhir karena dari situ akan timbul kesanggupan untuk mengikuti Yesus dengan sungguh-sungguh, yang akan mendatangkan sukacita yang ajaib dan tidak terkatakan.
+                </p>
+            </div>
+            
+            <!-- EDIT: Doa -->
+            <div class="prayer">
+                <div class="prayer-label">Doa</div>
+                <div id="prayerText">
+                    Bapa di surga, terima kasih untuk firman-Mu hari ini. Kami percaya bahwa Engkau tidak pernah meninggalkan kami sendirian, Engkau selalu berada bersama kami. Dalam nama Tuhan Yesus, kami berdoa. Amin.
+                </div>
+            </div>
+        </section>
+
+        <div class="divider"></div>
+
+        <!-- QUOTES HARIAN -->
+        <section class="quote-section" id="quoteContainer">
+            <div class="quote-icon">"</div>
+            
+            <!-- EDIT: Quotes -->
+            <div class="quote-text" id="quoteText">
+                "Iman bukan untuk memahami Tuhan, tetapi untuk mempercayai-Nya meski kita tidak memahami."
+            </div>
+            
+            <!-- EDIT: Sumber Quotes -->
+            <div class="quote-author" id="quoteAuthor">
+                — C.S. Lewis
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="copyright">© 2026 by Ps. Yanto Goutama</div>
+        <div>Renungan Harian Embun Pagi</div>
+        <div class="footer-verse">"Firman-Mu pelita bagi kakiku dan terang bagi jalanku." — Mazmur 119:105</div>
+    </footer>
 
     <script>
-        // ============================================
-        // KONFIGURASI - GANTI JIKA PERLU
-        // ============================================
+        // KONFIGURASI TANGGAL RENUNGAN
+        // Format: YYYY-MM-DD
+        const RENUNGAN_DATE = '2026-03-15'; // ← GANTI TANGGAL INI SETIAP HARI
         
-        // URL Backend Server (ganti jika deploy ke hosting)
-        const API_BASE_URL = 'http://localhost:3000/api';
-        
-        // ============================================
-        
-        let currentDate = new Date();
-        let isLoading = false;
-
-        function formatDate(date) {
-            const year = date.getFullYear();
-            const month = String(date.getMonth() + 1).padStart(2, '0');
-            const day = String(date.getDate()).padStart(2, '0');
-            return `${year}-${month}-${day}`;
+        // Fungsi untuk mengecek apakah konten boleh ditampilkan
+        function checkAvailability() {
+            const now = new Date();
+            const currentDateStr = now.toISOString().split('T')[0];
+            
+            // Untuk testing/editor mode: tambahkan ?edit=true di URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const isEditMode = urlParams.get('edit') === 'true';
+            
+            if (isEditMode) {
+                document.getElementById('editorMode').classList.add('active');
+                document.getElementById('currentDate').textContent = formatDateIndonesia(now);
+                return true;
+            }
+            
+            // Cek apakah sudah lewat tanggal renungan
+            if (currentDateStr < RENUNGAN_DATE) {
+                // Belum waktunya (masih besok)
+                document.body.innerHTML = `
+                    <div style="display: flex; justify-content: center; align-items: center; height: 100vh; flex-direction: column; font-family: 'Cormorant Garamond', serif; color: #666; text-align: center; padding: 20px;">
+                        <div style="font-size: 3rem; margin-bottom: 20px;">🌅</div>
+                        <h1 style="font-weight: 400; margin-bottom: 15px;">Renungan Belum Tersedia</h1>
+                        <p>Renungan untuk tanggal ini akan tersedia pada pukul 00:00 WIB.</p>
+                        <p style="margin-top: 10px; font-size: 0.9rem; color: #999;">Tanggal renungan: ${formatDateIndonesia(new Date(RENUNGAN_DATE))}</p>
+                    </div>
+                `;
+                return false;
+            } else if (currentDateStr > RENUNGAN_DATE) {
+                // Sudah lewat (kemarin), tampilkan pesan bahwa ini renungan lama
+                document.getElementById('currentDate').textContent = formatDateIndonesia(new Date(RENUNGAN_DATE));
+                
+                // Tambahkan banner bahwa ini renungan lama
+                const banner = document.createElement('div');
+                banner.style.cssText = 'background: #fff3cd; color: #856404; padding: 15px; text-align: center; font-size: 0.85rem; border-bottom: 1px solid #ffeaa7;';
+                banner.innerHTML = '⚠️ Ini adalah renungan untuk tanggal ' + formatDateIndonesia(new Date(RENUNGAN_DATE)) + '. Renungan harian hanya tersedia untuk hari tersebut.';
+                document.body.insertBefore(banner, document.body.firstChild);
+                return true;
+            } else {
+                // Hari yang tepat
+                document.getElementById('currentDate').textContent = formatDateIndonesia(now);
+                return true;
+            }
         }
-
-        function formatDateDisplay(date) {
+        
+        // Format tanggal ke bahasa Indonesia
+        function formatDateIndonesia(date) {
             const options = { 
                 weekday: 'long', 
                 year: 'numeric', 
@@ -560,188 +395,28 @@
             };
             return date.toLocaleDateString('id-ID', options);
         }
-
-        function setLoading(loading) {
-            isLoading = loading;
-            const buttons = document.querySelectorAll('.date-btn');
-            buttons.forEach(btn => {
-                btn.disabled = loading;
-            });
-            
-            if (loading) {
-                document.getElementById('renunganSource').textContent = 'Mengambil data...';
-                document.getElementById('quotesSource').textContent = 'Mengambil data...';
-                document.getElementById('renunganContent').innerHTML = `
-                    <div class="loading">
-                        <div class="spinner"></div>
-                        <p>Memuat renungan dari alkitab.mobi...</p>
-                    </div>
-                `;
-                document.getElementById('quotesContent').innerHTML = `
-                    <div class="loading">
-                        <div class="spinner"></div>
-                        <p>Memuat quotes dari rehobot.org...</p>
-                    </div>
-                `;
-            }
-        }
-
-        function showError(message, details = '') {
-            const errorHTML = `
-                <div class="error-message fade-in">
-                    <p><strong>Terjadi Kesalahan</strong></p>
-                    <p>${message}</p>
-                    ${details ? `<p style="margin-top: 10px; font-size: 0.85em; opacity: 0.8;">${details}</p>` : ''}
-                    <p style="margin-top: 15px; font-size: 0.85em;">
-                        <strong>Cara menjalankan:</strong><br>
-                        1. Install Node.js<br>
-                        2. Jalankan: <code>npm install</code><br>
-                        3. Jalankan: <code>npm start</code><br>
-                        4. Buka: <code>http://localhost:3000</code>
-                    </p>
-                </div>
-            `;
-            document.getElementById('renunganContent').innerHTML = errorHTML;
-            document.getElementById('quotesContent').innerHTML = errorHTML;
-            document.getElementById('renunganSource').textContent = 'Error - Server offline';
-            document.getElementById('quotesSource').textContent = 'Error - Server offline';
-        }
-
-        function showServerStatus(status) {
-            const statusDiv = document.getElementById('serverStatus');
-            if (status === 'connected') {
-                statusDiv.innerHTML = `
-                    <div class="server-status fade-in">
-                        ✅ Server terhubung • Data diambil langsung dari alkitab.mobi & rehobot.org
-                    </div>
-                `;
-            } else {
-                statusDiv.innerHTML = '';
-            }
-        }
-
-        async function fetchData(dateStr) {
-            try {
-                // Fetch renungan dan quotes secara parallel
-                const [renunganRes, quotesRes] = await Promise.all([
-                    fetch(`${API_BASE_URL}/renungan/${dateStr}`),
-                    fetch(`${API_BASE_URL}/quotes/${dateStr}`)
-                ]);
-
-                if (!renunganRes.ok || !quotesRes.ok) {
-                    throw new Error('Gagal mengambil data dari server');
-                }
-
-                const renungan = await renunganRes.json();
-                const quotes = await quotesRes.json();
-
-                return { renungan, quotes };
-
-            } catch (error) {
-                console.error('Fetch error:', error);
-                throw error;
-            }
-        }
-
-        async function renderContent() {
-            const dateStr = formatDate(currentDate);
-            const displayDate = formatDateDisplay(currentDate);
-            
-            document.getElementById('currentDate').textContent = displayDate;
-            
-            setLoading(true);
-            
-            try {
-                const data = await fetchData(dateStr);
-                
-                // Update source indicator
-                document.getElementById('renunganSource').innerHTML = `✓ Data asli • alkitab.mobi`;
-                document.getElementById('quotesSource').innerHTML = `✓ Data asli • rehobot.org`;
-                showServerStatus('connected');
-                
-                // Render Renungan
-                const renungan = data.renungan;
-                document.getElementById('renunganContent').innerHTML = `
-                    <div class="renungan-content fade-in">
-                        <h3>${renungan.title}</h3>
-                        <div class="verse">
-                            <strong>${renungan.verse}</strong><br>
-                            ${renungan.verseText}
-                        </div>
-                        <div class="intro">${renungan.intro}</div>
-                        <div class="content-text">
-                            ${renungan.content.split('\n\n').map(p => `<p>${p}</p>`).join('')}
-                        </div>
-                    </div>
-                `;
-                
-                // Render Quotes
-                const quotes = data.quotes.quotes || data.quotes;
-                const featuredQuote = quotes[0];
-                const otherQuotes = quotes.slice(1);
-                
-                document.getElementById('quotesContent').innerHTML = `
-                    <div class="fade-in">
-                        <div class="quote-card">
-                            <div class="quote-text">${featuredQuote.text}</div>
-                            <div class="quote-author">— ${featuredQuote.author}</div>
-                        </div>
-                        <div class="quotes-list">
-                            ${otherQuotes.map(q => `
-                                <div class="mini-quote">
-                                    <div class="mini-quote-text">"${q.text}"</div>
-                                    <div class="mini-quote-source">— ${q.author}</div>
-                                </div>
-                            `).join('')}
-                        </div>
-                    </div>
-                `;
-                
-                // Update button state
-                const today = new Date();
-                const isToday = dateStr === formatDate(today);
-                const btnToday = document.getElementById('btnToday');
-                
-                if (isToday) {
-                    btnToday.classList.add('active');
-                } else {
-                    btnToday.classList.remove('active');
-                }
-                
-            } catch (error) {
-                showError(
-                    'Tidak dapat terhubung ke backend server.',
-                    'Pastikan server Node.js sudah berjalan di localhost:3000'
-                );
-                showServerStatus('disconnected');
-            } finally {
-                setLoading(false);
-            }
-        }
-
-        function changeDate(days) {
-            if (isLoading) return;
-            const newDate = new Date(currentDate);
-            newDate.setDate(newDate.getDate() + days);
-            currentDate = newDate;
-            renderContent();
-        }
-
-        function goToToday() {
-            if (isLoading) return;
-            currentDate = new Date();
-            renderContent();
-        }
-
-        function refreshData() {
-            if (isLoading) return;
-            renderContent();
-        }
-
-        // Initialize
+        
+        // Inisialisasi
         document.addEventListener('DOMContentLoaded', function() {
-            renderContent();
+            checkAvailability();
         });
+        
+        // Auto-refresh pada tengah malam untuk update konten
+        function setupMidnightRefresh() {
+            const now = new Date();
+            const tomorrow = new Date(now);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            tomorrow.setHours(0, 0, 0, 0);
+            
+            const msUntilMidnight = tomorrow - now;
+            
+            setTimeout(function() {
+                location.reload();
+            }, msUntilMidnight);
+        }
+        
+        setupMidnightRefresh();
     </script>
+
 </body>
 </html>
