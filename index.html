@@ -15,8 +15,9 @@
         
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #faf9f7 0%, #f5f3f0 100%);
-            color: #2c2c2c;
+            /* WARNA BACKGROUND: Deep Navy Blue ke Soft Blue */
+            background: linear-gradient(135deg, #1a237e 0%, #3949ab 50%, #5c6bc0 100%);
+            color: #e8eaf6;
             line-height: 1.8;
             min-height: 100vh;
             display: flex;
@@ -27,9 +28,10 @@
         header {
             text-align: center;
             padding: 60px 20px 40px;
-            background: rgba(255,255,255,0.6);
+            /* WARNA HEADER: Glassmorphism dengan tint biru */
+            background: rgba(255,255,255,0.08);
             backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(0,0,0,0.05);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
         
         .logo {
@@ -37,15 +39,18 @@
             font-size: 2.2rem;
             font-weight: 600;
             letter-spacing: 3px;
-            color: #3d3d3d;
+            /* WARNA LOGO: Gold/Emas elegan */
+            color: #ffd700;
             margin-bottom: 8px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
         
         .tagline {
             font-size: 0.85rem;
             letter-spacing: 4px;
             text-transform: uppercase;
-            color: #888;
+            /* WARNA TAGLINE: Soft gold */
+            color: #c5b358;
             font-weight: 300;
         }
         
@@ -53,7 +58,8 @@
             margin-top: 20px;
             font-family: 'Cormorant Garamond', serif;
             font-size: 1.1rem;
-            color: #666;
+            /* WARNA TANGGAL: Light blue-white */
+            color: #b0bec5;
             font-style: italic;
         }
         
@@ -68,13 +74,16 @@
         
         /* Renungan Section */
         .renungan-section {
-            background: #fff;
+            /* WARNA BOX: Dark glass dengan tint biru */
+            background: rgba(255,255,255,0.95);
             padding: 50px;
-            border-radius: 4px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
             margin-bottom: 40px;
             position: relative;
             overflow: hidden;
+            /* WARNA TEKS DI DALAM BOX: Dark untuk kontras */
+            color: #1a237e;
         }
         
         .renungan-section::before {
@@ -83,34 +92,46 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #d4c4b0, #b8a898, #d4c4b0);
+            height: 4px;
+            /* WARNA GARIS ATAS: Gold gradient */
+            background: linear-gradient(90deg, #ffd700, #ffed4e, #ffd700);
         }
         
         .section-label {
             font-size: 0.75rem;
             letter-spacing: 3px;
             text-transform: uppercase;
-            color: #b8a898;
+            /* WARNA LABEL: Navy */
+            color: #1a237e;
             margin-bottom: 30px;
-            font-weight: 500;
+            font-weight: 600;
+            opacity: 0.8;
         }
         
         .verse-ref {
             font-family: 'Cormorant Garamond', serif;
             font-size: 1.3rem;
-            color: #5c5c5c;
+            /* WARNA AYAT: Deep navy */
+            color: #0d1642;
             margin-bottom: 25px;
             font-style: italic;
-            border-left: 2px solid #d4c4b0;
+            /* WARNA BORDER KIRI: Gold */
+            border-left: 3px solid #ffd700;
             padding-left: 20px;
+            font-weight: 600;
+        }
+        
+        .verse-ref strong {
+            /* WARNA REFERENSI AYAT: Bright gold */
+            color: #b8860b;
         }
         
         .renungan-text {
             font-family: 'Cormorant Garamond', serif;
             font-size: 1.25rem;
             line-height: 2;
-            color: #3d3d3d;
+            /* WARNA TEKS RENUNGAN: Dark blue-gray */
+            color: #283593;
             text-align: justify;
             margin-bottom: 30px;
         }
@@ -119,13 +140,24 @@
             margin-bottom: 1.2em;
         }
         
+        /* WARNA JUDUL DI DALAM RENUNGAN: Navy */
+        .renungan-text .logo {
+            color: #1a237e;
+            text-shadow: none;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+        
         .prayer {
-            background: #faf9f7;
+            /* WARNA BACKGROUND DOA: Soft blue-gray */
+            background: #e8eaf6;
             padding: 25px;
-            border-radius: 2px;
+            border-radius: 8px;
             font-style: italic;
-            color: #555;
-            border-left: 3px solid #d4c4b0;
+            /* WARNA TEKS DOA: Navy */
+            color: #1a237e;
+            /* WARNA BORDER KIRI DOA: Gold */
+            border-left: 4px solid #ffd700;
             margin-top: 30px;
         }
         
@@ -133,10 +165,12 @@
             font-size: 0.7rem;
             letter-spacing: 2px;
             text-transform: uppercase;
-            color: #b8a898;
+            /* WARNA LABEL DOA: Navy */
+            color: #1a237e;
             margin-bottom: 10px;
             font-style: normal;
-            font-weight: 500;
+            font-weight: 600;
+            opacity: 0.7;
         }
         
         /* Quote Section */
@@ -148,25 +182,30 @@
         
         .quote-icon {
             font-size: 3rem;
-            color: #d4c4b0;
+            /* WARNA PETIK: Gold */
+            color: #ffd700;
             line-height: 1;
             margin-bottom: 20px;
-            opacity: 0.6;
+            opacity: 0.8;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
         
         .quote-text {
             font-family: 'Cormorant Garamond', serif;
             font-size: 1.5rem;
             font-style: italic;
-            color: #4a4a4a;
+            /* WARNA QUOTE: White/cream */
+            color: #fff8e1;
             line-height: 1.6;
             margin-bottom: 20px;
             position: relative;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
         
         .quote-author {
             font-size: 0.9rem;
-            color: #888;
+            /* WARNA AUTHOR: Soft gold */
+            color: #c5b358;
             letter-spacing: 1px;
             font-weight: 400;
         }
@@ -174,29 +213,36 @@
         .divider {
             width: 40px;
             height: 1px;
-            background: #d4c4b0;
+            /* WARNA DIVIDER: Gold */
+            background: #ffd700;
             margin: 30px auto;
+            opacity: 0.5;
         }
         
         /* Footer */
         footer {
             text-align: center;
             padding: 40px 20px;
-            background: #f5f3f0;
-            border-top: 1px solid rgba(0,0,0,0.05);
+            /* WARNA FOOTER: Darker navy */
+            background: rgba(13, 22, 66, 0.6);
+            border-top: 1px solid rgba(255,255,255,0.1);
             font-size: 0.8rem;
-            color: #999;
+            /* WARNA TEKS FOOTER: Light blue-gray */
+            color: #9fa8da;
             letter-spacing: 1px;
         }
         
         .copyright {
             margin-bottom: 10px;
+            /* WARNA COPYRIGHT: Gold */
+            color: #ffd700;
         }
         
         .footer-verse {
             font-family: 'Cormorant Garamond', serif;
             font-style: italic;
-            color: #aaa;
+            /* WARNA AYAT FOOTER: Soft blue */
+            color: #b0bec5;
             font-size: 0.9rem;
             margin-top: 15px;
         }
@@ -206,15 +252,18 @@
             position: fixed;
             top: 20px;
             right: 20px;
-            background: #fff;
+            /* WARNA EDITOR MODE: Glass white */
+            background: rgba(255,255,255,0.95);
             padding: 10px 20px;
             border-radius: 30px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
             font-size: 0.75rem;
             letter-spacing: 1px;
-            color: #666;
+            /* WARNA TEKS EDITOR: Navy */
+            color: #1a237e;
             z-index: 1000;
             display: none;
+            font-weight: 500;
         }
         
         .editor-mode.active {
@@ -244,6 +293,17 @@
         @media print {
             .editor-mode {
                 display: none !important;
+            }
+            
+            body {
+                background: #fff !important;
+                color: #000 !important;
+            }
+            
+            .renungan-section {
+                background: #fff !important;
+                color: #000 !important;
+                box-shadow: none !important;
             }
         }
         
@@ -380,12 +440,12 @@
             if (currentDateStr < RENUNGAN_DATE) {
                 // Belum waktunya (masih besok)
                 document.body.innerHTML = `
-                    <div style="display: flex; justify-content: center; align-items: center; height: 100vh; flex-direction: column; font-family: 'Cormorant Garamond', serif; color: #666; text-align: center; padding: 20px; background: #faf9f7;">
+                    <div style="display: flex; justify-content: center; align-items: center; height: 100vh; flex-direction: column; font-family: 'Cormorant Garamond', serif; color: #e8eaf6; text-align: center; padding: 20px; background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);">
                         <div style="font-size: 3rem; margin-bottom: 20px;">🌅</div>
-                        <h1 style="font-weight: 400; margin-bottom: 15px; font-size: 1.8rem;">Renungan Belum Tersedia</h1>
-                        <p style="margin-bottom: 10px;">Renungan untuk tanggal ini akan tersedia pada pukul 00:00 WIB.</p>
-                        <p style="font-size: 0.9rem; color: #999; font-style: italic;">Tanggal renungan: ${renunganDateDisplay}</p>
-                        <p style="font-size: 0.8rem; color: #bbb; margin-top: 20px;">Sekarang: ${now.toLocaleDateString('id-ID', options)}</p>
+                        <h1 style="font-weight: 400; margin-bottom: 15px; font-size: 1.8rem; color: #ffd700;">Renungan Belum Tersedia</h1>
+                        <p style="margin-bottom: 10px; color: #b0bec5;">Renungan untuk tanggal ini akan tersedia pada pukul 00:00 WIB.</p>
+                        <p style="font-size: 0.9rem; color: #9fa8da; font-style: italic;">Tanggal renungan: ${renunganDateDisplay}</p>
+                        <p style="font-size: 0.8rem; color: #7986cb; margin-top: 20px;">Sekarang: ${now.toLocaleDateString('id-ID', options)}</p>
                     </div>
                 `;
                 return false;
@@ -395,7 +455,7 @@
                 
                 // Tambahkan banner bahwa ini renungan lama
                 const banner = document.createElement('div');
-                banner.style.cssText = 'background: #fff3cd; color: #856404; padding: 15px; text-align: center; font-size: 0.85rem; border-bottom: 1px solid #ffeaa7; font-family: Inter, sans-serif;';
+                banner.style.cssText = 'background: rgba(255,215,0,0.15); color: #ffd700; padding: 15px; text-align: center; font-size: 0.85rem; border-bottom: 1px solid rgba(255,215,0,0.3); font-family: Inter, sans-serif;';
                 banner.innerHTML = `⚠️ Ini adalah renungan untuk tanggal ${renunganDateDisplay}. Renungan harian hanya tersedia untuk hari tersebut.`;
                 document.body.insertBefore(banner, document.body.firstChild);
                 return true;
@@ -427,3 +487,5 @@
         
         setupMidnightRefresh();
     </script>
+</body>
+</html>
