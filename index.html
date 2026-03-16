@@ -172,6 +172,13 @@
             border-left: 4px solid #ffd700;
             margin-top: 20px;
         }
+
+        .youtube-thumbnail {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
         
         .youtube-link {
             display: inline-block;
@@ -439,12 +446,17 @@
 
             <div class="divider"></div>
 
-            <!-- YOUTUBE LINK SECTION -->
+                        <!-- YOUTUBE LINK SECTION -->
             <div class="youtube-section">
-                <!-- LINK YOUTUBE - GANTI DI SINI -->
+                <!-- GANTI LINK YOUTUBE DI SINI -->
+                <!-- Contoh: https://www.youtube.com/watch?v=ABC123XYZ -->
                 <div class="youtube-link-box">
-                    <a href="https://www.youtube.com/watch?v=GANTI_LINK_INI" class="youtube-link" target="_blank">
-                        https://youtu.be/qPG45bvea50?si=mUHzKakN-5J2PVC4
+                    <img src="https://img.youtube.com/vi/qPG45bvea50?si=mUHzKakN-5J2PVC4/maxresdefault.jpg" 
+                         alt="Thumbnail" 
+                         class="youtube-thumbnail"
+                         onerror="this.src='https://img.youtube.com/vi/qPG45bvea50?si=mUHzKakN-5J2PVC4/hqdefault.jpg'">
+                    <a href="https://youtu.be/qPG45bvea50?si=mUHzKakN-5J2PVC4" class="youtube-link" target="_blank">
+                        Tonton Video di YouTube →
                     </a>
                 </div>
             </div>
