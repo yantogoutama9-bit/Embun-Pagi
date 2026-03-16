@@ -175,9 +175,12 @@
 
         .youtube-thumbnail {
             width: 100%;
+            max-width: 100%;
+            height: auto;
             border-radius: 8px;
             margin-bottom: 15px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            display: block;
         }
         
         .youtube-link {
@@ -446,16 +449,15 @@
 
             <div class="divider"></div>
 
-                        <!-- YOUTUBE LINK SECTION -->
+                         <!-- YOUTUBE LINK SECTION -->
             <div class="youtube-section">
-                <!-- GANTI LINK YOUTUBE DI SINI -->
-                <!-- Contoh: https://www.youtube.com/watch?v=ABC123XYZ -->
                 <div class="youtube-link-box">
-                    <img src="https://img.youtube.com/vi/qPG45bvea50?si=mUHzKakN-5J2PVC4/maxresdefault.jpg" 
-                         alt="Thumbnail" 
+                    <!-- GANTI ID VIDEO DI 3 TEMPAT: qPG45bvea50 -->
+                    <img src="https://img.youtube.com/vi/qPG45bvea50/maxresdefault.jpg" 
+                         alt="Thumbnail Video" 
                          class="youtube-thumbnail"
-                         onerror="this.src='https://img.youtube.com/vi/qPG45bvea50?si=mUHzKakN-5J2PVC4/hqdefault.jpg'">
-                    <a href="https://youtu.be/qPG45bvea50?si=mUHzKakN-5J2PVC4" class="youtube-link" target="_blank">
+                         onerror="this.src='https://img.youtube.com/vi/qPG45bvea50/hqdefault.jpg'">
+                    <a href="https://www.youtube.com/watch?v=qPG45bvea50" class="youtube-link" target="_blank">
                         Tonton Video di YouTube →
                     </a>
                 </div>
