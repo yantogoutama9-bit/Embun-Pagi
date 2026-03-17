@@ -155,6 +155,33 @@
             text-align: left;
         }
         
+        /* Button Styles */
+        .btn-container {
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        .btn-renungan {
+            display: inline-block;
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            color: #1a237e;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255,215,0,0.3);
+            border: 2px solid transparent;
+        }
+        
+        .btn-renungan:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255,215,0,0.4);
+            border-color: #fff;
+        }
+        
         /* YouTube Section */
         .youtube-section {
             background: rgba(255,255,255,0.95);
@@ -394,6 +421,11 @@
             .logo {
                 font-size: 1.8rem;
             }
+            
+            .btn-renungan {
+                padding: 12px 30px;
+                font-size: 1rem;
+            }
         }
         
         /* Print styles */
@@ -432,10 +464,48 @@
     </header>
 
     <main>
-        <!-- HALAMAN UTAMA: BERANDA + RENUNGAN -->
+        <!-- HALAMAN BERANDA (TAMPILAN AWAL) -->
         <section class="page-section active" id="home">
-            
-            <!-- BAGIAN RENUNGAN (LANGSUNG TAMPIL) -->
+            <div class="home-intro">
+                <h1 class="home-title">Selamat Datang di Embun Pagi</h1>
+                <p class="home-description">
+                    Embun Pagi adalah renungan harian yang hadir untuk menyegarkan jiwa dan memperkuat iman Anda setiap pagi. Melalui firman Tuhan, kita diajak untuk merenungkan kebenaran ilahi dan menerapkannya dalam kehidupan sehari-hari.
+                </p>
+                <div class="home-verse">
+                    "Firman-Mu pelita bagi kakiku dan terang bagi jalanku."
+                    <br>— Mazmur 119:105
+                </div>
+                <p class="home-description">
+                    Mari mulai hari Anda dengan membaca renungan dan merenungkan quotes inspiratif. Biarkan Roh Kudus menuntun langkah Anda hari ini.
+                </p>
+                
+                <!-- TOMBOL KE RENUNGAN HARI INI -->
+                <div class="btn-container">
+                    <button class="btn-renungan" onclick="showPage('renungan')">
+                        📖 Baca Renungan Hari Ini
+                    </button>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- YOUTUBE LINK SECTION -->
+            <div class="youtube-section">
+                <div class="youtube-link-box">
+                    <!-- GANTI ID VIDEO: qPG45bvea50 -->
+                    <img src="https://img.youtube.com/vi/qPG45bvea50/maxresdefault.jpg" 
+                         alt="Thumbnail Video" 
+                         class="youtube-thumbnail"
+                         onerror="this.src='https://img.youtube.com/vi/qPG45bvea50/hqdefault.jpg'">
+                    <a href="https://www.youtube.com/watch?v=qPG45bvea50" class="youtube-link" target="_blank">
+                        Tonton Video di YouTube →
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- HALAMAN RENUNGAN HARI INI -->
+        <section class="page-section" id="renungan">
             <div class="renungan-section">
                 <div class="section-label">Renungan Hari Ini</div>
                 
@@ -486,21 +556,12 @@
                     </div>
                 </div>
             </div>
-
-            <div class="divider"></div>
-
-            <!-- YOUTUBE LINK SECTION -->
-            <div class="youtube-section">
-                <div class="youtube-link-box">
-                    <!-- GANTI ID VIDEO: qPG45bvea50 -->
-                    <img src="https://img.youtube.com/vi/qPG45bvea50/maxresdefault.jpg" 
-                         alt="Thumbnail Video" 
-                         class="youtube-thumbnail"
-                         onerror="this.src='https://img.youtube.com/vi/qPG45bvea50/hqdefault.jpg'">
-                    <a href="https://www.youtube.com/watch?v=qPG45bvea50" class="youtube-link" target="_blank">
-                        Tonton Video di YouTube →
-                    </a>
-                </div>
+            
+            <!-- TOMBOL KEMBALI KE BERANDA -->
+            <div class="btn-container">
+                <button class="btn-renungan" onclick="showPage('home')" style="background: transparent; color: #ffd700; border: 2px solid #ffd700;">
+                    ← Kembali ke Beranda
+                </button>
             </div>
         </section>
 
