@@ -155,6 +155,33 @@
             text-align: left;
         }
         
+        /* Button Styles */
+        .btn-container {
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        .btn-renungan {
+            display: inline-block;
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            color: #1a237e;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255,215,0,0.3);
+            border: 2px solid transparent;
+        }
+        
+        .btn-renungan:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255,215,0,0.4);
+            border-color: #fff;
+        }
+        
         /* YouTube Section */
         .youtube-section {
             background: rgba(255,255,255,0.95);
@@ -394,6 +421,11 @@
             .logo {
                 font-size: 1.8rem;
             }
+            
+            .btn-renungan {
+                padding: 12px 30px;
+                font-size: 1rem;
+            }
         }
         
         /* Print styles */
@@ -417,7 +449,7 @@
 </head>
 <body>
 
-    <!-- Navigation Menu - EDIT BARIS 32-35 -->
+    <!-- Navigation Menu -->
     <nav class="nav-menu">
         <a href="kemarin.html" class="nav-link">Kemarin</a>
         <a href="index.html" class="nav-link active">Hari Ini</a>
@@ -432,7 +464,7 @@
     </header>
 
     <main>
-        <!-- HALAMAN BERANDA -->
+        <!-- HALAMAN BERANDA (TAMPILAN AWAL) -->
         <section class="page-section active" id="home">
             <div class="home-intro">
                 <h1 class="home-title">Selamat Datang di Embun Pagi</h1>
@@ -446,11 +478,18 @@
                 <p class="home-description">
                     Mari mulai hari Anda dengan membaca renungan dan merenungkan quotes inspiratif. Biarkan Roh Kudus menuntun langkah Anda hari ini.
                 </p>
+                
+                <!-- TOMBOL KE RENUNGAN HARI INI -->
+                <div class="btn-container">
+                    <button class="btn-renungan" onclick="showPage('renungan')">
+                        📖 Baca Renungan Hari Ini
+                    </button>
+                </div>
             </div>
 
             <div class="divider"></div>
 
-            <!-- YOUTUBE LINK SECTION - EDIT BARIS 261 -->
+            <!-- YOUTUBE LINK SECTION -->
             <div class="youtube-section">
                 <div class="youtube-link-box">
                     <!-- GANTI ID VIDEO: qPG45bvea50 -->
@@ -465,23 +504,21 @@
             </div>
         </section>
 
-                <!-- HALAMAN RENUNGAN - EDIT BARIS 276-308 -->
+        <!-- HALAMAN RENUNGAN HARI INI -->
         <section class="page-section" id="renungan">
             <div class="renungan-section">
-                <div class="section-label">Renungan Besok</div>
+                <div class="section-label">Renungan Hari Ini</div>
                 
-                <!-- EDIT BARIS 276-279: Ayat dasar besok -->
+                <!-- Ayat dasar -->
                 <div class="verse-ref">
                     "... ia ... berangkat ... dengan tidak mengetahui tempat yang ia tujui."
                     <br><strong>Ibrani 11:8</strong>
                 </div>
                 
-                <!-- EDIT BARIS 283-302: Isi Renungan besok -->
+                <!-- Isi Renungan -->
                 <div class="renungan-text">
-                    <!-- EDIT BARIS 283: Judul besok -->
-                    <div class="logo">Kehidupan Iman Abraham</div>
+                    <div class="logo">Dapatkah Saya Mencapai Tingkat Ini?</div>
                     
-                    <!-- EDIT BARIS 285-302: Paragraf renungan besok -->
                     <p>
                         Dalam Perjanjian Lama, hubungan seseorang dengan Allah dilihat dari tingkat pemisahan (the degree of separation) dalam hidup orang itu. Pemisahan ini ditunjukkan dalam hidup Abraham oleh perpisahannya dari negeri dan keluarganya.
                     </p>
@@ -502,27 +539,32 @@
                     </p>
                 </div>
                 
-                <!-- EDIT BARIS 308: Doa besok -->
+                <!-- Doa -->
                 <div class="prayer">
                     <div class="prayer-label">Doa</div>
                     <div>
-                        “Bapa, ajar aku untuk memahami iman dengan benar. Bukan sekadar mencari keberhasilan atau pengalaman yang tinggi, tetapi belajar mengasihi dan mengenal Engkau setiap hari. Saat langkah terasa biasa, bahkan melelahkan, kuatkan hatiku untuk tetap setia berjalan bersama-Mu. Biarlah imanku bertumbuh dalam keseharian, tidak goyah oleh keadaan, tetapi tetap teguh karena Engkau yang memimpin hidupku dari hari ke hari. Amin.”
+                     “Bapa, ajar aku untuk memahami iman dengan benar. Bukan sekadar mencari keberhasilan atau pengalaman yang tinggi, tetapi belajar mengasihi dan mengenal Engkau setiap hari. Saat langkah terasa biasa, bahkan melelahkan, kuatkan hatiku untuk tetap setia berjalan bersama-Mu. Biarlah imanku bertumbuh dalam keseharian, tidak goyah oleh keadaan, tetapi tetap teguh karena Engkau yang memimpin hidupku dari hari ke hari. Amin.”
                     </div>
                 </div>
             </div>
+            
+            <!-- TOMBOL KEMBALI KE BERANDA -->
+            <div class="btn-container">
+                <button class="btn-renungan" onclick="showPage('home')" style="background: transparent; color: #ffd700; border: 2px solid #ffd700;">
+                    ← Kembali ke Beranda
+                </button>
+            </div>
         </section>
 
-        <!-- HALAMAN QUOTES - EDIT BARIS 324-327 -->
+        <!-- HALAMAN QUOTES -->
         <section class="page-section" id="quotes">
             <div class="quote-section">
                 <div class="quote-icon">"</div>
                 
-                <!-- EDIT BARIS 324: Quote besok -->
                 <div class="quote-text">
                     “Kehidupan iman bukanlah rangkaian momen spektakuler, melainkan kesetiaan dalam langkah-langkah kecil yang terus dijalani.”
                 </div>
                 
-                <!-- EDIT BARIS 327: Sumber Quote besok -->
                 <div class="quote-author">
                     — Dallas Willard
                 </div>
